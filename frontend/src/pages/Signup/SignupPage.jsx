@@ -1,15 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isEmail, isStrongPassword } from "validator";
+import { isEmail, isStrongPassword } from "validator";
 import { signup } from "../../services/authentication";
 
 export const SignupPage = () => {
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    
+    const [username, setUsername] = useState("");
+    const [firstname, setFirstname] = useState("");
+    const [lastname, setLastname] = useState("");
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -41,7 +41,7 @@ export const SignupPage = () => {
             return; 
         }
         try {
-            await signup(firstname, lastname, username, email, password,  );
+            await signup(email, password, username, firstname, lastname);
             console.log("redirecting...:");
             navigate("/login");
         } catch (err) {
@@ -58,6 +58,9 @@ export const SignupPage = () => {
         }
     };
 
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    };
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
     };
@@ -126,7 +129,7 @@ export const SignupPage = () => {
                 onChange={handlePasswordChange}
             />
             <br />
-            {error && <p role="error" className="error">{error}</p>}
+            {error && <p className="error">{error}</p>}
             <input role="submit-button" id="submit" type="submit" value="Submit" />
             </form>
         <div>

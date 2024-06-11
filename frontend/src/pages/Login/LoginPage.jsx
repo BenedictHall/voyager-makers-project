@@ -8,6 +8,8 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -16,9 +18,13 @@ export const LoginPage = () => {
       const responseLogin = await login(email, password);
       localStorage.setItem("token", responseLogin.token);
       localStorage.setItem('userId', responseLogin.userId);
+      const responseLogin = await login(email, password);
+      localStorage.setItem("token", responseLogin.token);
+      localStorage.setItem('userId', responseLogin.userId);
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
+      setError('Invalid login');
       setError('Invalid login');
       navigate("/login");
     }
@@ -51,9 +57,12 @@ export const LoginPage = () => {
           onChange={handlePasswordChange}
         />
         <br />
-        {error && <p role="error" className="error">{error}</p>}
+        {error && <p className="error">{error}</p>}
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
+      <div>
+      <span>Don&lsquo;t have an account? <a href="/signup">Sign up</a></span>
+      </div>
       <div>
       <span>Don&lsquo;t have an account? <a href="/signup">Sign up</a></span>
       </div>
