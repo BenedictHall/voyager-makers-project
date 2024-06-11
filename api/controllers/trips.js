@@ -1,4 +1,4 @@
-const Trip = require ("../models/trips");
+const Trip = require ("../models/trip");
 
 const create = (req, res) => {
     const location = req.body.location;
@@ -17,6 +17,14 @@ const create = (req, res) => {
             res.status(400).json({message: "Something went wrong"});
         });
 };
+
+const find = (req, res) => {
+    const location = req.body.location;
+    const startDate = req.body.startDate;
+    const endDate = req.body.endDate;
+
+    
+}
 
 const TripsController = {
     create: create,

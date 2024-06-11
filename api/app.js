@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 // API Routes
 app.use("/users", usersRouter);
 app.use("/tokens", authenticationRouter);
-app.use("/newtrip", tripsRouter);
+app.use("/trips", tripsRouter);
 
 // 404 Handler
 app.use((_req, res) => {

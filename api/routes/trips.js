@@ -5,6 +5,6 @@ const TripsController = require("../controllers/trips");
 
 const router = express.Router();
 
-router.post("/", TripsController.create);
+router.post("/newtrip", TripsController.create);
 
 module.exports = router;
