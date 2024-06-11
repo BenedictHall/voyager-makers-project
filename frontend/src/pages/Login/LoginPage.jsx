@@ -6,16 +6,20 @@ import { login } from "../../services/authentication";
 export const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const token = await login(email, password);
-      localStorage.setItem("token", token);
+      const responseLogin = await login(email, password);
+      localStorage.setItem("token", responseLogin.token);
+      localStorage.setItem('userId', responseLogin.userId);
       navigate("/dashboard");
     } catch (err) {
       console.error(err);
+      setError('Invalid login');
       navigate("/login");
     }
   };
@@ -46,8 +50,13 @@ export const LoginPage = () => {
           value={password}
           onChange={handlePasswordChange}
         />
+        <br />
+        {error && <p className="error">{error}</p>}
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
+      <div>
+      <span>Don&lsquo;t have an account? <a href="/signup">Sign up</a></span>
+      </div>
     </>
   );
 };
