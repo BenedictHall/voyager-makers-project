@@ -1,7 +1,7 @@
 {
-    "name": "acebook-api",
+    "name": "voyager-api",
     "version": "1.0.0",
-    "description": "Backend template for the Makers Acebook project.",
+    "description": "Backend for Voyager.",
     "main": "index.js",
     "scripts": {
         "start": "node index.js",
