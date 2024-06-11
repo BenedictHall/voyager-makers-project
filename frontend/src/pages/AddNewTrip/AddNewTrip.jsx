@@ -14,6 +14,7 @@ export const AddNewTrip = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        const {location, startDate, endDate} = formData;
         try {
             await newTrip(location, startDate, endDate);
             navigate ("/trip/:id");
@@ -40,21 +41,24 @@ export const AddNewTrip = () => {
             <input
             id="location"
             type="text"
-            value={location}
+            name ="location"
+            value={formData.location}
             onChange={handleChange}
             />
             <label htmlFor="startDate">Start Date: </label>
             <input
             id="startDate"
-            type="text"
-            value={startDate}
+            type="date"
+            name ="startDate"
+            value={formData.startDate}
             onChange={handleChange}
             />
             <label htmlFor="endDate">End Date: </label>
             <input
             id="endDate"
-            type="text"
-            value={endDate}
+            type="date"
+            name ="endDate"
+            value={formData.endDate}
             onChange={handleChange}
             />
             <input role="submit-button" id="submit" type="submit" value="Submit" />

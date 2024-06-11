@@ -22,6 +22,6 @@ export const newTrip = async (location, startDate, endDate) => {
         throw new Error ( 
             `Received status ${response.status} when logging in. Expected 201`
         );
-    };
+    }
 
 };

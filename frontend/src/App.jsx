@@ -4,6 +4,8 @@ import "./App.css";
 import { HomePage } from "./pages/Home/HomePage";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
+import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip"
+
 
 // docs: https://reactrouter.com/en/main/start/overview
 const router = createBrowserRouter([
