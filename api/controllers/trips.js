@@ -1,6 +1,7 @@
 const Trip = require ("../models/trip");
 //const User - require("../models/user");
 const { generateToken } = require("../lib/token.js");
+const mongoose = require('mongoose');
 
 // const getAllTrips = async (req, res) => {
 //     const trips = await Trip.find().sort({ createdAt: -1 }); //sorts post in decending order of createdAt
@@ -13,6 +14,7 @@ const getOneTrip = async (req, res) => {
     const token = generateToken(req.trip_id);
     res.status(200).json({ trip: trip, token: token });
 };
+
 
 const create = (req, res) => {
     const location = req.body.location;
