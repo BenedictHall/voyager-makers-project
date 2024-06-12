@@ -1,13 +1,16 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import {beforeEach, expect, test, vi} from "vitest";
+import createFetchMock from "vitest-fetch-mock";
 
 import { useNavigate } from 'react-router-dom';
 import { newTrip } from '../../src/services/trips';
 
 import { AddNewTrip } from '../../src/pages/AddNewTrip/AddNewTrip';
+import jwt from 'jsonwebtoken';
 
-// Mocking React Router's useNavigate function
+createFetchMock(vi).enableMocks();
+
 vi.mock("react-router-dom", () => {
     const navigateMock = vi.fn();
     const useNavigateMock = () => navigateMock; // Create a mock function for useNavigate
@@ -25,10 +28,12 @@ const completeNewTripForm = async () => {
     const locationInputEl = screen.getByLabelText("Location:");
     const startDateInputEl = screen.getByLabelText("Start Date:");
     const endDateInputEl = screen.getByLabelText("End Date:");
+    const submitButtonEl = screen.getByRole("submit-button");
 
     await user.type(locationInputEl, "Test");
     await user.type(startDateInputEl, "2025-06-12");
     await user.type(endDateInputEl, "2025-06-24");
+    await user.click(submitButtonEl);
 };
 
 describe("Add new trip page", () => {
@@ -37,9 +42,12 @@ describe("Add new trip page", () => {
     });
 
     test("allows user to create a new trip", async () => {
+        fetch.mockResponseOnce(JSON.stringify({ token: "testToken"}), {
+        status:201,
+        });
         render(<AddNewTrip />);
         await completeNewTripForm();
-        expect(newTrip).toHaveBeenCalledWith("Test", "2025-06-12", "2025-06-24");
+        expect(newTrip).toHaveBeenCalledWith("testToken", "Test", "2025-06-12", "2025-06-24");
     });
 
     // test("nagivates to /trips/:id on successful trip creation", async () => {
