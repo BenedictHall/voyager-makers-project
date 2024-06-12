@@ -4,7 +4,8 @@ import "./App.css";
 import { HomePage } from "./pages/Home/HomePage";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
-import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip"
+import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip";
+import { GetTrips } from "./pages/Trips/tripsPage"
 
 
 // docs: https://reactrouter.com/en/main/start/overview
@@ -22,9 +23,15 @@ const router = createBrowserRouter([
     element: <SignupPage />,
   },
   {
+    path: "/trips",
+    element: <GetTrips />, 
+  },
+  {
     path: "/trips/newtrip",
     element: <AddNewTrip />, 
-  }
+  },
+  
+
 ]);
 
 const App = () => {
