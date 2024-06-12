@@ -5,6 +5,7 @@ const cors = require("cors");
 const usersRouter = require("./routes/users");
 const authenticationRouter = require("./routes/authentication");
 const tokenChecker = require("./middleware/tokenChecker");
+const toDoRouter = require("./routes/toDo");
 
 const app = express();
 
@@ -19,6 +20,7 @@ app.use(bodyParser.json());
 // API Routes
 app.use("/users", usersRouter);
 app.use("/tokens", authenticationRouter);
+app.use("/toDos", tokenChecker, toDoRouter);
 
 // 404 Handler
 app.use((_req, res) => {
