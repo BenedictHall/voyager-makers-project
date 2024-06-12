@@ -29,7 +29,7 @@ const completeLoginForm = async () => {
   const submitButtonEl = screen.getByRole("submit-button");
 
   await user.type(emailInputEl, "test@email.com");
-  await user.type(passwordInputEl, "1234");
+  await user.type(passwordInputEl, "Password1!");
   await user.click(submitButtonEl);
 };
 
@@ -43,10 +43,10 @@ describe("Login Page", () => {
 
     await completeLoginForm();
 
-    expect(login).toHaveBeenCalledWith("test@email.com", "1234");
+    expect(login).toHaveBeenCalledWith("test@email.com", "Password1!");
   });
 
-  test("navigates to /posts on successful login", async () => {
+  test("navigates to /dashboard on successful login", async () => {
     render(<LoginPage />);
 
     login.mockResolvedValue("secrettoken123");
@@ -54,7 +54,7 @@ describe("Login Page", () => {
 
     await completeLoginForm();
 
-    expect(navigateMock).toHaveBeenCalledWith("/posts");
+    expect(navigateMock).toHaveBeenCalledWith("/dashboard");
   });
 
   test("navigates to /login on unsuccessful login", async () => {
@@ -66,5 +66,16 @@ describe("Login Page", () => {
     await completeLoginForm();
 
     expect(navigateMock).toHaveBeenCalledWith("/login");
+  });
+
+  test("displays an error message on unsuccessful login", async () => {
+    render(<LoginPage />);
+
+    login.mockRejectedValue(new Error("Error logging in"));
+
+    await completeLoginForm();
+
+    const errorMessage = await screen.findByRole("error");
+    expect(errorMessage.textContent).toEqual("Invalid login");
   });
 });

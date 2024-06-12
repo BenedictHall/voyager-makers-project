@@ -2,20 +2,34 @@ const app = require("../../app");
 const supertest = require("supertest");
 require("../mongodb_helper");
 const User = require("../../models/user");
+const bcrypt = require("bcrypt");
 
 describe("/tokens", () => {
-  beforeAll(async () => {
+  beforeAll( async () => {
+
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync("Password1!", salt);
     const user = new User({
-      email: "auth-test@test.com",
-      password: "12345678",
-    });
+              firstname: "John",
+              lastname: "Smith",
+              username: "johnsmith",
+              email: "johnsmith@example.com",
+              password: hash,
+              
+            }); 
+      return await user.save();
+        console.log("THIS IS THE USER !!!!", user);
+      });
+
+      
+    
 
     // We need to use `await` so that the "beforeAll" setup function waits for
     // the asynchronous user.save() to be done before exiting.
     // Otherwise, the tests belowc ould run without the user actyakkt being
     // saved, causing tests to fail inconsistently.
-    await user.save();
-  });
+    
+  
 
   afterAll(async () => {
     await User.deleteMany({});
@@ -25,7 +39,7 @@ describe("/tokens", () => {
     const testApp = supertest(app);
     const response = await testApp
       .post("/tokens")
-      .send({ email: "auth-test@test.com", password: "12345678" });
+      .send({ email: "johnsmith@example.com", password: "Password1!"});
 
     expect(response.status).toEqual(201);
     expect(response.body.token).not.toEqual(undefined);
@@ -36,7 +50,7 @@ describe("/tokens", () => {
     const testApp = supertest(app);
     const response = await testApp
       .post("/tokens")
-      .send({ email: "non-existent@test.com", password: "1234" });
+      .send({ email: "non-existent@test.com", password: "Password1!" });
 
     expect(response.status).toEqual(401);
     expect(response.body.token).toEqual(undefined);
@@ -47,7 +61,7 @@ describe("/tokens", () => {
     let testApp = supertest(app);
     const response = await testApp
       .post("/tokens")
-      .send({ email: "auth-test@test.com", password: "1234" });
+      .send({ email: "johnsmith@example.com", password: "Wrongpassword1!"});
 
     expect(response.status).toEqual(401);
     expect(response.body.token).toEqual(undefined);

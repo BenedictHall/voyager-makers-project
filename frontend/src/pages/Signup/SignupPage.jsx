@@ -4,11 +4,12 @@ import { isEmail, isStrongPassword } from "validator";
 import { signup } from "../../services/authentication";
 
 export const SignupPage = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [username, setUsername] = useState("");
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
@@ -40,7 +41,7 @@ export const SignupPage = () => {
             return; 
         }
         try {
-            await signup(email, password, username, firstname, lastname);
+            await signup(firstname, lastname, username, email, password,  );
             console.log("redirecting...:");
             navigate("/login");
         } catch (err) {
@@ -125,7 +126,7 @@ export const SignupPage = () => {
                 onChange={handlePasswordChange}
             />
             <br />
-            {error && <p className="error">{error}</p>}
+            {error && <p role="error" className="error">{error}</p>}
             <input role="submit-button" id="submit" type="submit" value="Submit" />
             </form>
         <div>
