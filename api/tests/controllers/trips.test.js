@@ -1,8 +1,6 @@
 const request = require("supertest");
-
 const app = require("../../app");
 const Trip = require("../../models/trip");
-
 require("../mongodb_helper");
 
 describe("/trips", () => {
@@ -47,7 +45,7 @@ describe("/trips", () => {
         beforeEach(async() => {
             await Trip.deleteMany({});
         });
-        
+
         test("response code is 400", async () => {
             const response = await request(app)
                 .post("/trips/newtrip")
