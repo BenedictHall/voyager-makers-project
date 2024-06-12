@@ -6,16 +6,18 @@ const Trip = require("../../models/trip");
 require("../mongodb_helper");
 
 describe("/trips", () => {
-    beforeEach(async() => {
-        await Trip.deleteMany({});
-    });
 
     describe("POST, when location, start date and end date are provided", () => {
+        beforeEach(async() => {
+            await Trip.deleteMany({});
+        });
+
         test("the response code is 201", async () => {
             const response = await request(app)
                 .post("/trips/newtrip")
                 .send({ location: "Manchester", startDate: "2024-06-08", endDate: "2024-06-15"})
-            expect(response.statusCode).toBe(201);
+            expect(response.statusCode).toBe(201); 
+            
         });
 
         test("a trip created", async () => {
@@ -28,6 +30,7 @@ describe("/trips", () => {
             expect (newTrip.location).toEqual("Manchester");
             expect (newTrip.startDate).toEqual("2024-06-08");
             expect (newTrip.endDate).toEqual("2024-06-15");
+            
         });
     });
     
@@ -41,6 +44,10 @@ describe("/trips", () => {
     
 
     describe("POST, when location is missing", () =>{
+        beforeEach(async() => {
+            await Trip.deleteMany({});
+        });
+        
         test("response code is 400", async () => {
             const response = await request(app)
                 .post("/trips/newtrip")

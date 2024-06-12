@@ -5,7 +5,7 @@ const TripsController = require("../controllers/trips");
 
 const router = express.Router();
 
-router.get("/", TripsController.getAllTrips);
+// router.get("/", TripsController.getAllTrips);
 
 router.post("/newtrip", TripsController.create);
 

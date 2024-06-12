@@ -27,14 +27,13 @@ const create = (req, res) => {
             res.status(201).json({ message: "OK"});
         })
         .catch((err) => {
-            console.error(err);
+            // console.error(err);
+        
             res.status(400).json({message: "Something went wrong"});
         });
 };
 
 
-
-    
 const TripsController = {
     create: create,
     // getAllTrips: getAllTrips,
