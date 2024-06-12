@@ -3,11 +3,11 @@ const Trip = require ("../models/trip");
 const { generateToken } = require("../lib/token.js");
 const mongoose = require('mongoose');
 
-// const getAllTrips = async (req, res) => {
-//     const trips = await Trip.find().sort({ createdAt: -1 }); //sorts post in decending order of createdAt
-//     const token = generateToken(req.user_id);
-//     res.status(200).json({ trips: trips, token: token });
-// };
+const getAllTrips = async (req, res) => {
+    const trips = await Trip.find();
+    const token = generateToken(req.user_id);
+    res.status(200).json({ trips: trips, token: token });
+};
 
 const getOneTrip = async (req, res) => {
     const trip = await Trip.find({_id:req.trip_id});
@@ -38,7 +38,7 @@ const create = (req, res) => {
 
 const TripsController = {
     create: create,
-    // getAllTrips: getAllTrips,
+    getAllTrips: getAllTrips,
     getOneTrip: getOneTrip, 
 
 }
