@@ -2,12 +2,11 @@ import {render, screen} from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
 import {beforeEach, expect, test, vi} from "vitest";
 import createFetchMock from "vitest-fetch-mock";
-
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { newTrip } from '../../src/services/trips';
 
 import { AddNewTrip } from '../../src/pages/AddNewTrip/AddNewTrip';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 createFetchMock(vi).enableMocks();
 
@@ -21,6 +20,13 @@ vi.mock("../../src/services/trips", () => {
     const newTripMock = vi.fn();
     return { newTrip: newTripMock };
 });
+
+// const LOCAL_STORAGE_KEY = "token"
+//         const getItemSpy = vi.spyOn(Storage.prototype, 'getItem')
+//         afterEach(() =>{
+//             localStorage.clear()
+//             getItemSpy.mockClear()
+//         })
 
 const completeNewTripForm = async () => {
     const user = userEvent.setup();
@@ -39,12 +45,12 @@ const completeNewTripForm = async () => {
 describe("Add new trip page", () => {
     beforeEach(() => {
         vi.resetAllMocks();
+        localStorage.clear()
     });
 
     test("allows user to create a new trip", async () => {
-        fetch.mockResponseOnce(JSON.stringify({ token: "testToken"}), {
-        status:201,
-        });
+        
+        localStorage.setItem("token", "testToken")
         render(<AddNewTrip />);
         await completeNewTripForm();
         expect(newTrip).toHaveBeenCalledWith("testToken", "Test", "2025-06-12", "2025-06-24");
