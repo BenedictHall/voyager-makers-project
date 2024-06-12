@@ -51,7 +51,7 @@ export const LoginPage = () => {
           onChange={handlePasswordChange}
         />
         <br />
-        {error && <p className="error">{error}</p>}
+        {error && <p role="error" className="error">{error}</p>}
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
       <div>
