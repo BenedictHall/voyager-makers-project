@@ -5,7 +5,8 @@ import { HomePage } from "./pages/Home/HomePage";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip";
-import { GetTrips } from "./pages/Trips/tripsPage"
+import { ShowAllTrips } from "./pages/Trips/tripsPage"
+import { Dashboard } from "./pages/Dashboard/Dashboard";
 
 
 // docs: https://reactrouter.com/en/main/start/overview
@@ -13,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />,
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />, 
   },
   {
     path: "/login",
@@ -24,12 +29,13 @@ const router = createBrowserRouter([
   },
   {
     path: "/trips",
-    element: <GetTrips />, 
+    element: <ShowAllTrips />, 
   },
   {
     path: "/trips/newtrip",
     element: <AddNewTrip />, 
   },
+
   
 
 ]);

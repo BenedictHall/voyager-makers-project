@@ -4,9 +4,7 @@ import {beforeEach, expect, test, vi} from "vitest";
 import createFetchMock from "vitest-fetch-mock";
 // import { useNavigate } from 'react-router-dom';
 import { newTrip } from '../../src/services/trips';
-
 import { AddNewTrip } from '../../src/pages/AddNewTrip/AddNewTrip';
-// import jwt from 'jsonwebtoken';
 
 createFetchMock(vi).enableMocks();
 

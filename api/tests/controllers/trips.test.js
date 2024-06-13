@@ -81,13 +81,13 @@ describe("/trips/", () => {
         })
 
         test("trips are recieved", async () => {
-            await request(app)
-                .get("/trips/")
-            const trips = await Trip.getAllTrips();
-            console.log(trips)
-            expect (trips[0].location).toEqual("Paris");
-            expect (trips[1].location).toEqual("Berlin");
-            expect (trips[2].location).toEqual("Singapore");
+            const response = await request(app)
+                .get("/trips/");
+            expect(response.body.trips.length).toBe(3);
+            
+            expect (response.body.trips[0].location).toEqual("Paris");
+            expect (response.body.trips[1].location).toEqual("Berlin");
+            expect (response.body.trips[2].location).toEqual("Singapore");
         })
     })
 })

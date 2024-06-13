@@ -1,5 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
+
 export const newTrip = async (token, location, startDate, endDate) => {
     const payload = {
         token: token,
@@ -23,8 +24,6 @@ export const newTrip = async (token, location, startDate, endDate) => {
     const newTrip = newTripResponse.trip
     return newTrip;
     }
-
-
     // const response = await fetch(`${BACKEND_URL}/tokens`, requestOptions);
     // if (response.status !== 201) {
     //     let data = await response.json(); 
@@ -35,4 +34,24 @@ export const newTrip = async (token, location, startDate, endDate) => {
     //     );
     // }
 
+};
+
+//to get trips from the database
+
+export const getTrips = async (token) => {
+    const requestOptions = {
+        method: "GET",
+        headers: {
+            Authorization: `Bear ${token}`,
+        },
+    };
+
+    const response = await fetch(`${BACKEND_URL}/trips`, requestOptions);
+
+    if (response.status !== 200) {
+        throw new Error("Unable to fetch trips");
+    }
+    
+    const data = await response.json();
+    return data;
 };
