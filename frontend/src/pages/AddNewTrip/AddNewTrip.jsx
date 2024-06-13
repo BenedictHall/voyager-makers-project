@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {newTrip} from "../../services/trips"
-import Navbar from "../../components/Navbar/navbar";
 
 export const AddNewTrip = () => {
 // fields go here
@@ -10,6 +9,7 @@ export const AddNewTrip = () => {
         location: '',
         startDate: '',
         endDate: '',
+        flight: '',
     })
     const navigate = useNavigate();
 
@@ -34,13 +34,21 @@ export const AddNewTrip = () => {
         });
     };
 
+    const handleOptionChange = (event) => {
+        const {value} = event.target;
+        setFormData({
+            ...formData,
+            flight: value
+        })
+    }
+
 
     return (
         <>
-        {/* <Navbar/> */}
         <h2>Add New Trip</h2>
         <form onSubmit={handleSubmit}>
             <label htmlFor="location">Location:</label>
+            <br/>
                 <input
                     id="location"
                     type="text"
@@ -48,7 +56,9 @@ export const AddNewTrip = () => {
                     value={formData.location}
                     onChange={handleChange}
                 />
+                <br/>
             <label htmlFor="startDate">Start Date: </label>
+            <br/>
                 <input
                     id="startDate"
                     type="date"
@@ -56,7 +66,9 @@ export const AddNewTrip = () => {
                     value={formData.startDate}
                     onChange={handleChange}
                 />
+                <br/>
             <label htmlFor="endDate">End Date: </label>
+            <br/>
                 <input
                     id="endDate"
                     type="date"
@@ -64,6 +76,16 @@ export const AddNewTrip = () => {
                     value={formData.endDate}
                     onChange={handleChange}
                 />
+                <br/>
+            <label htmlFor="flight">Have you booked a flight?</label>
+            <br/>
+            <input type="radio" id="yes" name="option" value="yes" onChange={handleOptionChange}/>
+            <label htmlFor="yes">Yes</label><br/>
+            <input type="radio" id="no" name="option" value="no" onChange={handleOptionChange}/>
+            <label htmlFor="no">No</label><br/>
+            
+                
+                
                 <input role="submit-button" id="submit" type="submit" value="Submit" />
         </form>
         </>
