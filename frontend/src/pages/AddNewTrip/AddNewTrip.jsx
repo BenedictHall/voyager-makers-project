@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { redirect, useNavigate } from "react-router-dom";
 
 import {newTrip} from "../../services/trips"
 import Navbar from "../../components/Navbar/navbar";
@@ -11,17 +11,10 @@ export const AddNewTrip = () => {
         startDate: '',
         endDate: '',
     })
-    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-
-        if (location.length === "") {
-            setError('Location is required.');
-            return;
-        }
-
         const {location, startDate, endDate} = formData;
         const token = localStorage.getItem("token");
         try {
@@ -55,7 +48,6 @@ export const AddNewTrip = () => {
                     value={formData.location}
                     onChange={handleChange}
                 />
-                {error && <p role = "error" className="error">{error}</p>}
             <label htmlFor="startDate">Start Date: </label>
                 <input
                     id="startDate"

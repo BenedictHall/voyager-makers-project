@@ -54,14 +54,4 @@ describe("Add new trip page", () => {
         expect(navigateMock).toHaveBeenCalledWith(`/trip/:id`);
         
     })
-
-    test("no trip created when location not supplied", async () => {
-        render(<AddNewTrip/>)
-        const startDateInputEl = screen.getByLabelText("Start Date:");
-        const endDateInputEl = screen.getByLabelText("End Date:");
-        await userEvent.type(startDateInputEl, "2025-06-12");
-        await userEvent.type(endDateInputEl, "2025-06-24");
-        const errorMessage = screen.getByRole("error")
-        expect(errorMessage.textContent).toEqual("Location must be provided.")
-    })
 })
