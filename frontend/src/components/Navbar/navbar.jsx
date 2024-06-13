@@ -3,7 +3,7 @@ import { useState } from "react";
 import { NavLink , Link, useNavigate} from "react-router-dom";
 import "../../../css/navbar.css";
 
-const Navbar =  () => {
+export const Navbar = () => {
     const navigate = useNavigate();
 
     const [search, setSearch] = useState("");
