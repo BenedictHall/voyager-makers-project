@@ -55,6 +55,7 @@ export const signup = async (firstname, lastname, username, email, password ) =>
     const errorData = await response.json();
     throw new Error(
         errorData.message ||
+
       `Received status ${response.status} when signing up. Expected 201`
     );
   }
