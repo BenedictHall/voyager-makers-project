@@ -1,37 +1,9 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import {beforeEach, describe, expect, test, vi} from "vitest";
 import '@testing-library/jest-dom';
 import Navbar from '../../src/components/Navbar/navbar';
-
-// set up localStorage mock ?
-const localStroageMock = (()=>{
-    let store ={};
-    return {
-        getItem(key) {
-            return store[key] || null;
-        },
-        removeItem(key) {
-            delete store[key];
-        },
-        clear() {
-            store={};
-        }
-    };
-})();
-
-//I need to mock the modules
-// vi.mock("react-router-dom", () => {
-//     const originalModule = vi.importActual('react-router-dom');
-//     return {
-//         ...originalModule,
-//         useNavigate: vi.fn(()=> vi.fn())
-//     }
-//     // const navigateMock = vi.fn();
-//     // const useNavigateMock = () => navigateMock; // Create a mock function for useNavigate
-//     // return { useNavigate: useNavigateMock };
-// });
 
 vi.mock('react-router-dom', async () => {
     const actual = await vi.importActual('react-router-dom');
@@ -61,3 +33,4 @@ describe('test Navbar component', ()=>{
         expect(screen.getByText('My Budget').closest('a')).toHaveAttribute('href', '/budget');
     });
 });
+
