@@ -63,10 +63,11 @@ const deleteToDo = async (req, res) => {
     const newToken = generateToken(req.user_id);
     try {
         const toDo = await ToDo.findById(toDoId);
+        console.log("!!!!!TODO",toDo);
         if (!toDo) {
             return res.status(404).json({ message: "ToDo not found" });
         }
-        await toDo.delete();
+        await toDo.deleteOne({ _id: toDoId});
         res.status(200).json({ message: "ToDo Deleted", token: newToken });
     } catch (error) {
         console.error(error);
