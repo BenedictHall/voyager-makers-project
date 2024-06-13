@@ -1,11 +1,11 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from "@testing-library/user-event";
-import { MemoryRouter, useNavigate } from 'react-router-dom';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import {beforeEach, describe, expect, test, vi} from "vitest";
 import '@testing-library/jest-dom';
 import Navbar from '../../src/components/Navbar/navbar';
 
-// set up localStorage mock 
+// set up localStorage mock ?
 const localStroageMock = (()=>{
     let store ={};
     return {
@@ -41,7 +41,6 @@ vi.mock('react-router-dom', async () => {
     }
 });
 
-
 describe('test Navbar component', ()=>{
     beforeEach(()=>{
         localStorage.clear();
@@ -55,11 +54,10 @@ describe('test Navbar component', ()=>{
         expect(voyagerLink.closest('a')).toHaveAttribute('href', '/dashboard');
     });
 
-    it('renders all navigation links correctly', () => {
+    test('renders all navigation links correctly', () => {
         render(<Navbar />, { wrapper: MemoryRouter });
         expect(screen.getByText('Voyager').closest('a')).toHaveAttribute('href', '/dashboard');
         expect(screen.getByText('My To Do').closest('a')).toHaveAttribute('href', '/todo');
         expect(screen.getByText('My Budget').closest('a')).toHaveAttribute('href', '/budget');
     });
-
-})
+});

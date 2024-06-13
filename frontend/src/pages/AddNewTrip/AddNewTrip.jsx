@@ -37,7 +37,7 @@ export const AddNewTrip = () => {
 
     return (
         <>
-        {/* <Navbar/> */}
+        <Navbar/>
         <h2>Add New Trip</h2>
         <form onSubmit={handleSubmit}>
             <label htmlFor="location">Location:</label>
