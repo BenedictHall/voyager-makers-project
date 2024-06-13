@@ -20,7 +20,6 @@ export const LoginPage = () => {
     } catch (err) {
       console.error(err);
       setError('Invalid login');
-      setError('Invalid login');
       navigate("/login");
     }
   };
@@ -55,9 +54,6 @@ export const LoginPage = () => {
         {error && <p role="error" className="error">{error}</p>}
         <input role="submit-button" id="submit" type="submit" value="Submit" />
       </form>
-      <div>
-      <span>Don&lsquo;t have an account? <a href="/signup">Sign up</a></span>
-      </div>
       <div>
       <span>Don&lsquo;t have an account? <a href="/signup">Sign up</a></span>
       </div>

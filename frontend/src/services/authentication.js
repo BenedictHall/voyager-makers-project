@@ -21,7 +21,6 @@ export const login = async (email, password) => {
   if (response.status === 201) {
     let data = await response.json();
     return data;
-    return data;
   } else {
     throw new Error(
       `Received status ${response.status} when logging in. Expected 201`
@@ -37,7 +36,6 @@ export const signup = async (firstname, lastname, username, email, password ) =>
     email: email,
     password: password,
   };
-  console.log(payload);
   console.log(payload);
 
   const requestOptions = {
@@ -57,7 +55,7 @@ export const signup = async (firstname, lastname, username, email, password ) =>
     const errorData = await response.json();
     throw new Error(
         errorData.message ||
-        errorData.message ||
+
       `Received status ${response.status} when signing up. Expected 201`
     );
   }
