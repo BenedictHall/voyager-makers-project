@@ -8,16 +8,11 @@ export const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const [error, setError] = useState("");
-
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const responseLogin = await login(email, password);
-      localStorage.setItem("token", responseLogin.token);
-      localStorage.setItem('userId', responseLogin.userId);
       const responseLogin = await login(email, password);
       localStorage.setItem("token", responseLogin.token);
       localStorage.setItem('userId', responseLogin.userId);

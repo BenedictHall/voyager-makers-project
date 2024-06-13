@@ -55,7 +55,6 @@ export const signup = async (firstname, lastname, username, email, password ) =>
     return;
   } else {
     const errorData = await response.json();
-    const errorData = await response.json();
     throw new Error(
         errorData.message ||
         errorData.message ||

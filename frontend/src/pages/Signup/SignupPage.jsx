@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { isEmail, isStrongPassword } from "validator";
-import { isEmail, isStrongPassword } from "validator";
 import { signup } from "../../services/authentication";
 
 export const SignupPage = () => {
@@ -59,9 +58,6 @@ export const SignupPage = () => {
         }
     };
 
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
-    };
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
     };
