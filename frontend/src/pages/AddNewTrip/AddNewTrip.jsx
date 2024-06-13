@@ -9,12 +9,19 @@ export const AddNewTrip = () => {
     const [formData, setFormData] = useState({
         location: '',
         startDate: '',
-        endDate: ''
+        endDate: '',
     })
+    const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        if (location.length === "") {
+            setError('Location is required.');
+            return;
+        }
+
         const {location, startDate, endDate} = formData;
         const token = localStorage.getItem("token");
         try {
@@ -37,7 +44,7 @@ export const AddNewTrip = () => {
 
     return (
         <>
-        <Navbar/>
+        {/* <Navbar/> */}
         <h2>Add New Trip</h2>
         <form onSubmit={handleSubmit}>
             <label htmlFor="location">Location:</label>
@@ -48,6 +55,7 @@ export const AddNewTrip = () => {
                     value={formData.location}
                     onChange={handleChange}
                 />
+                {error && <p role = "error" className="error">{error}</p>}
             <label htmlFor="startDate">Start Date: </label>
                 <input
                     id="startDate"

@@ -38,7 +38,7 @@ const Navbar =  () => {
             </div>
             <div className= "navbar-right">
                 
-                    <NavLink to = {"/trips"} className="link">Trips</NavLink>
+                    {/* <NavLink to = {"/trips"} className="link">Trips</NavLink> */}
                     <Link to = {"/todo"} className="link">My To Do</Link>
                     <Link to = {"/budget"} className="link">My Budget</Link>
                     <div className="menu">

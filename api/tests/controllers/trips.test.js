@@ -83,8 +83,7 @@ describe("/trips/", () => {
         test("trips are recieved", async () => {
             const response = await request(app)
                 .get("/trips/");
-            expect(response.body.trips.length).toBe(3);
-            
+            expect (response.body.trips.length).toBe(3);
             expect (response.body.trips[0].location).toEqual("Paris");
             expect (response.body.trips[1].location).toEqual("Berlin");
             expect (response.body.trips[2].location).toEqual("Singapore");
