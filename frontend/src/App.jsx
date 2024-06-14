@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Router, Route , Routes} from "react-router-dom";
+import { Route , Routes} from "react-router-dom";
 
 import "./App.css";
 import { HomePage } from "./pages/Home/HomePage";
@@ -10,51 +10,11 @@ import { ShowAllTrips } from "./pages/Trips/tripsPage"
 import { Navbar } from './components/Navbar/navbar.jsx';
 
 import { DashboardPage } from "./pages/Dashboard/DashboardPage";
-
-
-// docs: https://reactrouter.com/en/main/start/overview
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <HomePage />,
-//   },
-//   {
-//     path: "/dashboard",
-//     element: <Dashboard />, 
-//   },
-//   {
-//     path: "/login",
-//     element: <LoginPage />,
-//   },
-//   {
-//     path: "/signup",
-//     element: <SignupPage />,
-//   },
-//   {
-//     path: "/trips",
-//     element: <ShowAllTrips />, 
-//   },
-//   {
-//     path: "/trips/newtrip",
-//     element: <AddNewTrip />, 
-//   },
-
-  
-
-// ]);
+import { FlightTracker } from "./pages/Transport/FlightTracker.jsx";
 
 const App = () => {
   return (
     <>
-      {/* <Router> */}
-        {/* <Navbar /> */}
-        {/* <Routes>
-          <Route path= "/dashboard" element= {<Dashboard />}/>
-          <Route path= "/login" element= {<LoginPage />}/>
-        </Routes> */}
-      {/* </Router> */}
-      {/* <RouterProvider router={router} />
-        <Navbar/> */}
         <div className = "App">
           <Navbar/>
           <Routes>
@@ -64,6 +24,7 @@ const App = () => {
             <Route path="/signup" element={<SignupPage/>}/>
             <Route path="/trips" element={<ShowAllTrips/>}/>
             <Route path="/trips/newtrip" element={<AddNewTrip/>}/>
+            <Route path="/flights" element={<FlightTracker/>}/>
 
           </Routes>
         </div>
