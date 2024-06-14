@@ -1,13 +1,16 @@
 
 import { useState } from "react";
-import { NavLink , Link, useNavigate} from "react-router-dom";
+import { NavLink , Link, useNavigate, useLocation} from "react-router-dom";
 import "../../../css/navbar.css";
 
 export const Navbar = () => {
     const navigate = useNavigate();
-
+    const location = useLocation();
     const [search, setSearch] = useState("");
-
+    
+    if (location.path === "/login"){
+        return null;
+    }
 
     const handleLogout = () =>{
             localStorage.removeItem("token");
@@ -21,7 +24,7 @@ export const Navbar = () => {
         event.preventDefault()
 
     }
-
+    
 
     return (
         <nav className="navbar" id="navbar">
@@ -51,7 +54,4 @@ export const Navbar = () => {
         </nav>
     )        
 };
-
-
-
 export default Navbar;

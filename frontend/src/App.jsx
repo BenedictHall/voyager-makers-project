@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Router, Route , Routes} from "react-router-dom";
+import {  Route , Routes} from "react-router-dom";
 
 import "./App.css";
 import { HomePage } from "./pages/Home/HomePage";
@@ -44,15 +44,6 @@ import { Navbar } from './components/Navbar/navbar.jsx';
 const App = () => {
   return (
     <>
-      {/* <Router> */}
-        {/* <Navbar /> */}
-        {/* <Routes>
-          <Route path= "/dashboard" element= {<Dashboard />}/>
-          <Route path= "/login" element= {<LoginPage />}/>
-        </Routes> */}
-      {/* </Router> */}
-      {/* <RouterProvider router={router} />
-        <Navbar/> */}
         <div className = "App">
           <Navbar/>
           <Routes>
@@ -67,6 +58,7 @@ const App = () => {
         </div>
     </>
   );
+  
 };
 
 export default App;

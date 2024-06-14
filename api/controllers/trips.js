@@ -1,5 +1,5 @@
 const Trip = require ("../models/trip");
-//const User - require("../models/user");
+const User = require("../models/user");
 const { generateToken } = require("../lib/token.js");
 const mongoose = require('mongoose');
 
@@ -16,23 +16,39 @@ const getOneTrip = async (req, res) => {
 };
 
 
-const create = (req, res) => {
+
+const create = async (req, res) => {
     const location = req.body.location;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
+    const flight = req.body.flight;
+    const flightNumber = req.body.flightNumber;
+    const accommodation = req.body.accommodation;
+    // const userId = req.user_id;
 
-    const trip = new Trip({ location, startDate, endDate });
-    trip
+
+
+    const trip = new Trip({ 
+        // user: userId,
+        location: location, 
+        startDate: startDate, 
+        endDate: endDate,
+        flight: flight, 
+        flightNumber: flightNumber, 
+        accommodation: accommodation 
+    });
+    await trip
         .save()
         .then((trip) => {
             console.log("Trip created, id: ", trip._id.toString());
             res.status(201).json({ message: "OK"});
         })
         .catch((err) => {
-            // console.error(err);
+            console.error(err);
         
             res.status(400).json({message: "Something went wrong"});
         });
+        console.log("has the trip created",req.body)
 };
 
 
@@ -40,7 +56,6 @@ const TripsController = {
     create: create,
     getAllTrips: getAllTrips,
     getOneTrip: getOneTrip, 
-
 }
 
 module.exports = TripsController;

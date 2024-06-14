@@ -17,10 +17,10 @@ export const AddNewTrip = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const {location, startDate, endDate} = formData;
+        const {location, startDate, endDate,  flight, flightNumber, accommodation} = formData;
         const token = localStorage.getItem("token");
         try {
-            await newTrip(token, location, startDate, endDate);
+            await newTrip(token, location, startDate, endDate, flight, flightNumber, accommodation);
             navigate ("/trip/:id");
         } catch (err) {
         console.error(err);
@@ -88,25 +88,24 @@ export const AddNewTrip = () => {
                 />
                 <br/>
             <label htmlFor="flight">Have you booked a flight?</label>
-            <br/>
-            <input type="radio" id="flight-yes" name="option" value="yes" onChange={handleFlightChange}/>
-            <label htmlFor="yes">Yes</label><br/>
-            
-            <input type="radio" id="flight-no" name="option" value="no" onChange={handleFlightChange}/>
-            <label htmlFor="no">No</label><br/>
-            {formData.flight === "yes" &&
-                <div>
-                <label htmlFor="flightNumber">Flight Number:</label>
                 <br/>
-                <input
-                id="flightNumber"
-                type="text"
-                name ="flightNumber"
-                value={formData.flightNumber}
-                onChange={handleChange}
-                />
-                <br/>
-                </div>}
+                <input type="radio" id="flight-yes" name="option" value="yes" onChange={handleFlightChange}/>
+                <label htmlFor="yes">Yes</label><br/>
+                <input type="radio" id="flight-no" name="option" value="no" onChange={handleFlightChange}/>
+                <label htmlFor="no">No</label><br/>
+                {formData.flight === "yes" &&
+                    <div>
+                    <label htmlFor="flightNumber">Flight Number:</label>
+                    <br/>
+                    <input
+                    id="flightNumber"
+                    type="text"
+                    name ="flightNumber"
+                    value={formData.flightNumber}
+                    onChange={handleChange}
+                    />
+                    <br/>
+                    </div>}
             {/* HERE WE NEED TO AUTOMATICALLY CREATE A TODO IF NO */}
 
             <label htmlFor="accommodation">Have you booked accommodation?</label>
@@ -115,19 +114,20 @@ export const AddNewTrip = () => {
             <label htmlFor="yes">Yes</label><br/>
             
             <input type="radio" id="accommocation-no" name="option" value="no" onChange={handleAccommodationChange}/>
-            <label htmlFor="no">No</label><br/>
+            <label htmlFor="no">No</label>
+            <br/>
             {formData.accommodation === "yes" &&
                 <div>
-                <label htmlFor="accommodation-address">Address:</label>
-                <br/>
-                <input
-                id="accommodation-address"
-                type="text"
-                name ="accommodation-address"
-                value={formData.accommodation}
-                onChange={handleChange}
-                />
-                <br/>
+                    <label htmlFor="accommodation-address">Address:</label>
+                    <br/>
+                    <input
+                    id="accommodation-address"
+                    type="text"
+                    name ="accommodation-address"
+                    value={formData.accommodation}
+                    onChange={handleChange}
+                    />
+                    <br/>
                 </div>}
             {/* HERE WE NEED TO AUTOMATICALLY CREATE A TODO IF NO */}
                 

@@ -10,7 +10,7 @@ export const ShowAllTrips = () => {
     const navigate = useNavigate();
 
     useEffect(()=> {
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("token");``
         if(token) {
             getTrips(token)
             .then((data) => {
