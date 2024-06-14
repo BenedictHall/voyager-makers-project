@@ -28,7 +28,6 @@ export const ToDo = (props) => {
 
     return (
         <div>
-            <h1>ToDo:</h1>
             <h2>{props.toDo.title}</h2>
             <p>{props.toDo.description}</p>
             <p>{props.toDo.dueDate}</p>

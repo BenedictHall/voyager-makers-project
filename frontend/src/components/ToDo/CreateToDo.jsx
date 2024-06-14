@@ -74,7 +74,7 @@ export const CreateToDo = (props) => {
             <h1>Create ToDo</h1>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="title">Title</label>
+                    <label htmlFor="title">Title:</label>
                     <input
                         type="text"
                         id="title"
@@ -84,7 +84,7 @@ export const CreateToDo = (props) => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="description">Description</label>
+                    <label htmlFor="description">Description:</label>
                     <input
                         type="text"
                         id="description"
@@ -94,7 +94,7 @@ export const CreateToDo = (props) => {
                     />
                 </div>
                 <div>
-                    <label htmlFor="dueDate">Due Date</label>
+                    <label htmlFor="dueDate">Due Date:</label>
                     <input
                         type="date"
                         id="dueDate"
@@ -104,7 +104,7 @@ export const CreateToDo = (props) => {
                     />
                 </div>
                 {error && <p role="error" className="error">{error}</p>}
-                <button type="submit">Create ToDo</button>
+                <button type="submit" role="submit-button">Create ToDo</button>
             </form>
         </div>
     );          

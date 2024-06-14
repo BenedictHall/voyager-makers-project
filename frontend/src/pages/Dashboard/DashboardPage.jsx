@@ -29,7 +29,8 @@ export const DashboardPage = () => {
     }
 
     const handleToDoCreated = (newToDo) => {
-        setToDos((prevToDos) => [...prevToDos, newToDo]);
+        setToDos((prevToDos) => [newToDo, ...prevToDos]);
+        window.location.reload();
     };
 
     return (
@@ -37,6 +38,7 @@ export const DashboardPage = () => {
             <h2>Dashboard</h2>
             <p>Welcome to the dashboard</p>
             <CreateToDo token={token} tripId={tripId} onToDoCreated={handleToDoCreated}/>
+            <h2>My Todo List:</h2>
             <div>
                 {toDos.map((toDo) => (
                     <ToDo key={toDo._id} toDo={toDo} token={token} />
