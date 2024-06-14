@@ -4,6 +4,7 @@ const cors = require("cors");
 
 const usersRouter = require("./routes/users");
 const authenticationRouter = require("./routes/authentication");
+const tripsRouter = require("./routes/trips")
 const tokenChecker = require("./middleware/tokenChecker");
 const toDoRouter = require("./routes/toDo");
 
@@ -20,6 +21,7 @@ app.use(bodyParser.json());
 // API Routes
 app.use("/users", usersRouter);
 app.use("/tokens", authenticationRouter);
+app.use("/trips", tripsRouter);
 app.use("/toDos", tokenChecker, toDoRouter);
 
 // 404 Handler
