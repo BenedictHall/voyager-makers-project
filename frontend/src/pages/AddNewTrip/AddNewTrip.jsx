@@ -12,6 +12,7 @@ export const AddNewTrip = () => {
         flight: '',
         flightNumber: '',
         accommodation: '',
+        accommodationAddress: '',
     })
     const navigate = useNavigate();
 
@@ -37,18 +38,18 @@ export const AddNewTrip = () => {
     };
 
     const handleFlightChange = (event) => {
-        const {value} = event.target;
+        const {id} = event.target;
         setFormData({
             ...formData,
-            flight: value
+            flight: id
         })
     }
 
     const handleAccommodationChange = (event) => {
-        const {value} = event.target;
+        const {id} = event.target;
         setFormData({
             ...formData,
-            accommodation: value
+            accommodation: id
         })
     }
 
@@ -89,9 +90,9 @@ export const AddNewTrip = () => {
                 <br/>
             <label htmlFor="flight">Have you booked a flight?</label>
                 <br/>
-                <input type="radio" id="flight-yes" name="option" value="yes" onChange={handleFlightChange}/>
+                <input type="radio" id="yes" name="flight" value="yes" onChange={handleFlightChange}/>
                 <label htmlFor="yes">Yes</label><br/>
-                <input type="radio" id="flight-no" name="option" value="no" onChange={handleFlightChange}/>
+                <input type="radio" id="no" name="flight" value="no" onChange={handleFlightChange}/>
                 <label htmlFor="no">No</label><br/>
                 {formData.flight === "yes" &&
                     <div>
@@ -110,21 +111,21 @@ export const AddNewTrip = () => {
 
             <label htmlFor="accommodation">Have you booked accommodation?</label>
             <br/>
-            <input type="radio" id="accommodation-yes" name="option" value="yes" onChange={handleAccommodationChange}/>
+            <input type="radio" id="yes" name="accommodation" value="yes" onChange={handleAccommodationChange}/>
             <label htmlFor="yes">Yes</label><br/>
             
-            <input type="radio" id="accommocation-no" name="option" value="no" onChange={handleAccommodationChange}/>
+            <input type="radio" id="no" name="accommodation" value="no" onChange={handleAccommodationChange}/>
             <label htmlFor="no">No</label>
             <br/>
             {formData.accommodation === "yes" &&
                 <div>
-                    <label htmlFor="accommodation-address">Address:</label>
+                    <label htmlFor="accommodationAddress">Address:</label>
                     <br/>
                     <input
-                    id="accommodation-address"
+                    id="accommodationAddress"
                     type="text"
-                    name ="accommodation-address"
-                    value={formData.accommodation}
+                    name ="accommodationAddress"
+                    value={formData.accommodationAddress}
                     onChange={handleChange}
                     />
                     <br/>

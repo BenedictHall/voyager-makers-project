@@ -24,6 +24,7 @@ const create = async (req, res) => {
     const flight = req.body.flight;
     const flightNumber = req.body.flightNumber;
     const accommodation = req.body.accommodation;
+    const accommodationAddress = req.body.accommodationAddress;
     // const userId = req.user_id;
 
 
@@ -35,7 +36,8 @@ const create = async (req, res) => {
         endDate: endDate,
         flight: flight, 
         flightNumber: flightNumber, 
-        accommodation: accommodation 
+        accommodation: accommodation, 
+        accommodationAddress: accommodationAddress
     });
     await trip
         .save()
