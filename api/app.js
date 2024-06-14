@@ -6,6 +6,7 @@ const usersRouter = require("./routes/users");
 const authenticationRouter = require("./routes/authentication");
 const tripsRouter = require("./routes/trips")
 const tokenChecker = require("./middleware/tokenChecker");
+const toDoRouter = require("./routes/toDo");
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use("/users", usersRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/trips", tripsRouter);
+app.use("/toDos", tokenChecker, toDoRouter);
 
 // 404 Handler
 app.use((_req, res) => {

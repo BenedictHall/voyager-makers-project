@@ -6,8 +6,10 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip";
 import { ShowAllTrips } from "./pages/Trips/tripsPage"
-import { Dashboard } from "./pages/Dashboard/Dashboard";
+
 import { Navbar } from './components/Navbar/navbar.jsx';
+
+import { DashboardPage } from "./pages/Dashboard/DashboardPage";
 
 
 // docs: https://reactrouter.com/en/main/start/overview
@@ -48,7 +50,7 @@ const App = () => {
           <Navbar/>
           <Routes>
             <Route path="/" element={<HomePage/>}/>
-            <Route path="/dashboard" element={<Dashboard/>}/>
+            <Route path="/dashboard" element={<DashboardPage/>}/>
             <Route path="/login" element={<LoginPage/>}/>
             <Route path="/signup" element={<SignupPage/>}/>
             <Route path="/trips" element={<ShowAllTrips/>}/>
