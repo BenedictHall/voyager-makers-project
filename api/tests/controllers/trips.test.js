@@ -13,7 +13,14 @@ describe("/trips/newtrip", () => {
         test("the response code is 201", async () => {
             const response = await request(app)
                 .post("/trips/newtrip")
-                .send({ location: "Manchester", startDate: "2024-06-08", endDate: "2024-06-15"})
+                .send({ userId: "test_id",
+                    location: "Manchester",
+                    startDate: "2024-06-08", 
+                    endDate: "2024-06-15",
+                    flight: "",
+                    flightNumber: "", 
+                    accommodation: "",
+                    accommodationAddress: ""})
             expect(response.statusCode).toBe(201); 
             
         });
@@ -21,14 +28,13 @@ describe("/trips/newtrip", () => {
         test("a trip created", async () => {
             await request(app)
                 .post('/trips/newtrip')
-                .send({ location: "Manchester", startDate: "2024-06-08", endDate: "2024-06-15"})
+                .send({ location: "Manchester", startDate: "2024-06-08", endDate: "2024-06-15", flight: ""})
             
             const trips = await Trip.find();
             const newTrip = trips[trips.length - 1];
             expect (newTrip.location).toEqual("Manchester");
             expect (newTrip.startDate).toEqual("2024-06-08");
             expect (newTrip.endDate).toEqual("2024-06-15");
-            
         });
     });
     

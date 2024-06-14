@@ -1,9 +1,10 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 
-export const newTrip = async (token, location, startDate, endDate, flight, flightNumber, accommodation, accommodationAddress) => {
+export const newTrip = async (token, userId, location, startDate, endDate, flight, flightNumber, accommodation, accommodationAddress) => {
     const payload = {
         token: token,
+        userId: userId,
         location: location, 
         startDate: startDate, 
         endDate: endDate,

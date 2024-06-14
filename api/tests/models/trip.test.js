@@ -36,6 +36,16 @@ describe("Trip model", () => {
         expect(trip.endDate).toEqual("2024-09-10");
     });
 
+    test("flight selected yes", () => {
+        const trip = new Trip({
+            location: "Leeds", 
+            startDate: "2024-09-09",
+            endDate: "2024-09-10",
+            flight: "yes" 
+        });
+        expect(trip.flight).toEqual("yes");
+    });
+
     // test("can list all trips", async () => {
     //     const trips = await trips.find();
     //     expect(trips).toEqual([]);
@@ -55,4 +65,6 @@ describe("Trip model", () => {
         expect(trips[0].startDate).toEqual("2024-09-09");
         expect(trips[0].endDate).toEqual("2024-09-10" );
     });
+
+
 });
