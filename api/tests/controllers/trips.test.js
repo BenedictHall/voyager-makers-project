@@ -59,9 +59,9 @@ describe("/trips/newtrip", () => {
                 .send({startDate:"2024-06-08", endDate:"2024-05-09"});
             const trips = await Trip.find();
             expect(trips.length).toEqual(0);
-        })
+        });
     });
-})
+});
 
 describe("/trips/", () => {
 
@@ -77,8 +77,7 @@ describe("/trips/", () => {
             const response = await request(app)
                 .get("/trips")
             expect(response.statusCode).toBe(200)
-            
-        })
+        });
 
         test("trips are recieved", async () => {
             const response = await request(app)
@@ -87,6 +86,27 @@ describe("/trips/", () => {
             expect (response.body.trips[0].location).toEqual("Paris");
             expect (response.body.trips[1].location).toEqual("Berlin");
             expect (response.body.trips[2].location).toEqual("Singapore");
-        })
-    })
+        });
+    });
+});
+
+// test to get a single trip
+describe("/trips/:tripId", () => {
+    describe("GET, display every data about a single trip", () => {
+        let trip;
+
+        beforeEach(async() => {
+            await Trip.deleteMany({});
+            trip = await Trip.create({location:'Paris', startDate: '30-01-2025', endDate: '04-02-2025'});
+        });
+        
+        test("the response code is 200 with trip data", async () => {
+            const response = await request(app)
+                .get("/trips/"+trip._id)
+            expect(response.statusCode).toBe(200)
+            expect (response.body.singleTrip.location).toEqual("Paris");
+            expect (response.body.singleTrip.startDate).toEqual('30-01-2025');
+            expect (response.body.singleTrip.endDate).toEqual('04-02-2025');
+        });
+    });
 })
