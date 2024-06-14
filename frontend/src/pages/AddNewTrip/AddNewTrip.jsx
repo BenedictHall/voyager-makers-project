@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { redirect, useNavigate } from "react-router-dom";
-
 import {newTrip} from "../../services/trips"
-import Navbar from "../../components/Navbar/navbar";
+
 
 export const AddNewTrip = () => {
 // fields go here
@@ -19,7 +18,7 @@ export const AddNewTrip = () => {
         const token = localStorage.getItem("token");
         try {
             await newTrip(token, location, startDate, endDate);
-            navigate ("/trip/:id");
+            navigate ("/trips");
         } catch (err) {
         console.error(err);
         // add a redirect here
