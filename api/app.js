@@ -29,6 +29,7 @@ app.use("/toDos", tokenChecker, toDoRouter);
 app.use("/itineraries", tokenChecker, itinerariesRouter);
 app.use("/notifications", notificationRouter);
 app.use("/flights", flightRouter);
+app.use("/itineraries", tokenChecker, itinerariesRouter);
 
 // 404 Handler
 app.use((_req, res) => {
