@@ -41,11 +41,11 @@ describe("Add new trip page", () => {
     });
 
     test("allows user to create a new trip", async () => {
-        
+        localStorage.setItem("user_id", "testid")
         localStorage.setItem("token", "testToken")
         render(<AddNewTrip />);
         await completeNewTripForm();
-        expect(newTrip).toHaveBeenCalledWith("testToken", "Test", "2025-06-12", "2025-06-24", "", "", "", "");
+        expect(newTrip).toHaveBeenCalledWith("testToken","testid", "Test", "2025-06-12", "2025-06-24", "", "", "", "");
     });
 
     test("nagivates to /trips/:id on successful trip creation", async () => {

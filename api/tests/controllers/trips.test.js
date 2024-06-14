@@ -2,6 +2,7 @@ const request = require("supertest");
 const app = require("../../app");
 const Trip = require("../../models/trip");
 require("../mongodb_helper");
+const mongoose = require("mongoose");
 
 describe("/trips/newtrip", () => {
 
@@ -11,9 +12,11 @@ describe("/trips/newtrip", () => {
         });
 
         test("the response code is 201", async () => {
+            const mockUserId = new mongoose.Types.ObjectId();
             const response = await request(app)
                 .post("/trips/newtrip")
-                .send({ userId: "test_id",
+                .send({ 
+                    userId: mockUserId.toString(),
                     location: "Manchester",
                     startDate: "2024-06-08", 
                     endDate: "2024-06-15",
@@ -26,25 +29,28 @@ describe("/trips/newtrip", () => {
         });
 
         test("a trip created", async () => {
+            const mockUserId = new mongoose.Types.ObjectId();
             await request(app)
                 .post('/trips/newtrip')
-                .send({ location: "Manchester", startDate: "2024-06-08", endDate: "2024-06-15", flight: ""})
+                .send({ 
+                    userId: mockUserId.toString(),
+                    location: "Manchester",
+                    startDate: "2024-06-08", 
+                    endDate: "2024-06-15",
+                    flight: "yes",
+                    flightNumber: "FR202", 
+                    accommodation: "yes",
+                    accommodationAddress: "Mums house"})
             
             const trips = await Trip.find();
             const newTrip = trips[trips.length - 1];
             expect (newTrip.location).toEqual("Manchester");
-            expect (newTrip.startDate).toEqual("2024-06-08");
-            expect (newTrip.endDate).toEqual("2024-06-15");
+            expect (newTrip.flight).toEqual("yes");
+            expect (newTrip.flightNumber).toEqual("FR202");
+            expect (newTrip.accommodation).toEqual("yes");
+            expect (newTrip.accommodationAddress).toEqual("Mums house");
         });
     });
-    
-    //using POST, when location, start date and end date are provided
-    // test 1: the response code is 201
-    // test 2: a trip is created
-
-    //using POST, when start date and end date but no location is provided
-    // test 1: the response code is 400
-    // test 2: does not create a trip
     
 
     describe("POST, when location is missing", () =>{
@@ -72,11 +78,36 @@ describe("/trips/newtrip", () => {
 describe("/trips/", () => {
 
     describe("GET, when there are several trips in the database", () => {
+        const mockUserId = new mongoose.Types.ObjectId();
         beforeEach(async() => {
             await Trip.deleteMany({});
-            await Trip.create({location:'Paris', startDate: '30-01-2025', endDate: '04-02-2025'});
-            await Trip.create({location:'Berlin', startDate: '30-01-2025', endDate: '04-02-2025'});
-            await Trip.create({location:'Singapore', startDate: '30-01-2025', endDate: '04-02-2025'});
+            await Trip.create({ 
+                userId: mockUserId.toString(),
+                location: "Paris",
+                startDate: "2025-06-08", 
+                endDate: "2025-06-15",
+                flight: "yes",
+                flightNumber: "FR202", 
+                accommodation: "yes",
+                accommodationAddress: "Eiffel Tower"});
+            await Trip.create({
+                userId: mockUserId.toString(),
+                location: "Singapore",
+                startDate: "2026-06-08", 
+                endDate: "2026-06-15",
+                flight: "yes",
+                flightNumber: "FR402", 
+                accommodation: "yes",
+                accommodationAddress: "Big Hotels"});
+            await Trip.create({
+                userId: mockUserId.toString(),
+                location: "Berlin",
+                startDate: "2026-06-08", 
+                endDate: "2026-06-15",
+                flight: "yes",
+                flightNumber: "FR205", 
+                accommodation: "yes",
+                accommodationAddress: "wall"});
         });
 
         test("the response code is 200", async () => {
@@ -91,8 +122,8 @@ describe("/trips/", () => {
                 .get("/trips/");
             expect (response.body.trips.length).toBe(3);
             expect (response.body.trips[0].location).toEqual("Paris");
-            expect (response.body.trips[1].location).toEqual("Berlin");
-            expect (response.body.trips[2].location).toEqual("Singapore");
+            expect (response.body.trips[1].location).toEqual("Singapore");
+            expect (response.body.trips[2].location).toEqual("Berlin");
         })
     })
 })

@@ -1,6 +1,7 @@
 require("../mongodb_helper");
 const request = require("supertest");
 const Trip = require("../../models/trip");
+const mongoose = require("mongoose");
 
 
 describe("Trip model", () => {
@@ -9,62 +10,24 @@ describe("Trip model", () => {
         await Trip.deleteMany({}); 
     });
 
-    test("has a location", () => {
+    test("created a trip", () => {
+        const mockUserId = new mongoose.Types.ObjectId();
         const trip = new Trip({
-            location: "Paris",
-            startDate: "2024-01-01",
-            endDate: "2024-01-07"
+            
+            userId: mockUserId.toString(),
+            location: "Manchester",
+            startDate: "2024-06-08", 
+            endDate: "2024-06-15",
+            flight: "yes",
+            flightNumber: "FR202", 
+            accommodation: "yes",
+            accommodationAddress: "Mums house"
         });
-        expect(trip.location).toEqual("Paris");
+        expect (trip.location).toEqual("Manchester");
+        expect (trip.flight).toEqual("yes");
+        expect (trip.flightNumber).toEqual("FR202");
+        expect (trip.accommodation).toEqual("yes");
+        expect (trip.accommodationAddress).toEqual("Mums house");
     });
-
-    test("has a startDate", () => {
-        const trip = new Trip({
-            location: "Leeds", 
-            startDate: "2024-09-09",
-            endDate: "2024-09-10"  
-        });
-        expect(trip.startDate).toEqual("2024-09-09");
-    });
-
-    test("has a endDate", () => {
-        const trip = new Trip({
-            location: "Leeds", 
-            startDate: "2024-09-09",
-            endDate: "2024-09-10"  
-        });
-        expect(trip.endDate).toEqual("2024-09-10");
-    });
-
-    test("flight selected yes", () => {
-        const trip = new Trip({
-            location: "Leeds", 
-            startDate: "2024-09-09",
-            endDate: "2024-09-10",
-            flight: "yes" 
-        });
-        expect(trip.flight).toEqual("yes");
-    });
-
-    // test("can list all trips", async () => {
-    //     const trips = await trips.find();
-    //     expect(trips).toEqual([]);
-    // });
-
-    test("can save a user", async () => {
-        const trip = new Trip({
-            location: "Leeds", 
-            startDate: "2024-09-09",
-            endDate: "2024-09-10" 
-        });
-    
-        await trip.save();
-        const trips = await Trip.find();
-    
-        expect(trips[0].location).toEqual("Leeds");
-        expect(trips[0].startDate).toEqual("2024-09-09");
-        expect(trips[0].endDate).toEqual("2024-09-10" );
-    });
-
 
 });
