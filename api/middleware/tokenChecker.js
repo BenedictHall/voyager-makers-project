@@ -4,6 +4,7 @@ const JWT = require("jsonwebtoken");
 const tokenChecker = (req, res, next) => {
   let token;
   const authHeader = req.get("Authorization");
+  
 
   if (authHeader) {
     token = authHeader.slice(7);
