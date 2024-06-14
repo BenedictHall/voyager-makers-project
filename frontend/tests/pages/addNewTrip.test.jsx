@@ -25,6 +25,7 @@ const completeNewTripForm = async () => {
     const locationInputEl = screen.getByLabelText("Location:");
     const startDateInputEl = screen.getByLabelText("Start Date:");
     const endDateInputEl = screen.getByLabelText("End Date:");
+    
     const submitButtonEl = screen.getByRole("submit-button");
 
     await user.type(locationInputEl, "Test");
@@ -44,7 +45,7 @@ describe("Add new trip page", () => {
         localStorage.setItem("token", "testToken")
         render(<AddNewTrip />);
         await completeNewTripForm();
-        expect(newTrip).toHaveBeenCalledWith("testToken", "Test", "2025-06-12", "2025-06-24");
+        expect(newTrip).toHaveBeenCalledWith("testToken", "Test", "2025-06-12", "2025-06-24", "", "", "", "");
     });
 
     test("nagivates to /trips/:id on successful trip creation", async () => {

@@ -18,10 +18,10 @@ export const AddNewTrip = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const {location, startDate, endDate,  flight, flightNumber, accommodation} = formData;
+        const {location, startDate, endDate,  flight, flightNumber, accommodation, accommodationAddress} = formData;
         const token = localStorage.getItem("token");
         try {
-            await newTrip(token, location, startDate, endDate, flight, flightNumber, accommodation);
+            await newTrip(token, location, startDate, endDate, flight, flightNumber, accommodation, accommodationAddress);
             navigate ("/trip/:id");
         } catch (err) {
         console.error(err);
