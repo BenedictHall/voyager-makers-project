@@ -21,31 +21,21 @@ const AuthLayout = () => (
 
 const App = () => {
   return (
-    <>
-      {/* <Router> */}
-        {/* <Navbar /> */}
-        {/* <Routes>
-          <Route path= "/dashboard" element= {<Dashboard />}/>
-          <Route path= "/login" element= {<LoginPage />}/>
-        </Routes> */}
-      {/* </Router> */}
-      {/* <RouterProvider router={router} />
-        <Navbar/> */}
-        <div className = "App">
-          <Navbar/>
-          <Routes>
-            <Route path="/" element={<HomePage/>}/>
-            <Route path="/dashboard" element={<DashboardPage/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/signup" element={<SignupPage/>}/>
-            <Route path="/trips" element={<ShowAllTrips/>}/>
-            <Route path="/trips/newtrip" element={<AddNewTrip/>}/>
-            <Route path="/createitinerary" element={<CreateItineraryPage/>}/>
-            <Route path="/flights" element={<FlightTracker/>}/>
-
-          </Routes>
-        </div>
-    </>
+    <Routes>
+      <Route path="/" element={<HomePage/>}/>
+      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/signup" element={<SignupPage/>}/>
+      <Route path="/flights" element={<FlightTracker/>}/>
+      <Route element={<AuthLayout />}>
+        <Route path="trips">
+          <Route path=":tripId" element={<SingleTripPage />} />
+          <Route path=":tripId/createitinerary" element={<CreateItineraryPage />} />
+          <Route path="newtrip" element={<AddNewTrip />} />
+          <Route index element={<ShowAllTrips />} />
+        </Route>
+        <Route path="/dashboard" element={<DashboardPage/>}/>
+      </Route>
+    </Routes>
   );
 }
 
