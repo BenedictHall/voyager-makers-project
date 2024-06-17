@@ -8,6 +8,7 @@ export const newTrip = async (token, location, startDate, endDate) => {
         startDate: startDate, 
         endDate: endDate
     }
+    console.log("trip payload", payload)
     const requestOptions = {
         method:'POST',
         headers: {

@@ -10,6 +10,8 @@ const toDoRouter = require("./routes/toDo");
 const flightRouter = require("./routes/flights")
 const itinerariesRouter = require("./routes/itineraries");
 const notificationRouter = require("./routes/notification.js");
+const budgetRouter = require("./routes/budget");
+const expenseRouter = require("./routes/expense")
 
 const app = express();
 
@@ -29,7 +31,8 @@ app.use("/toDos", tokenChecker, toDoRouter);
 app.use("/itineraries", tokenChecker, itinerariesRouter);
 app.use("/notifications", notificationRouter);
 app.use("/flights", flightRouter);
-app.use("/itineraries", tokenChecker, itinerariesRouter);
+app.use("/budget",  tokenChecker, budgetRouter);
+app.use("/expense", expenseRouter)
 
 // 404 Handler
 app.use((_req, res) => {
