@@ -34,7 +34,7 @@ export function SingleTripPage () {
 
     return(
         <>
-            <h3>Single Trip Information</h3>
+            <h3 data-testid="singleTripHeader">Single Trip Information</h3>
             <SingleTripItem data={tripInformation} />
         </>
     )
