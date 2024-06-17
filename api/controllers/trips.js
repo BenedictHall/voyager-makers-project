@@ -1,5 +1,4 @@
 const Trip = require ("../models/trip");
-//const User - require("../models/user");
 const { generateToken } = require("../lib/token.js");
 const mongoose = require('mongoose');
 
@@ -9,12 +8,11 @@ const getAllTrips = async (req, res) => {
     res.status(200).json({ trips: trips, token: token });
 };
 
-const getOneTrip = async (req, res) => {
-    const trip = await Trip.find({_id:req.trip_id});
-    const token = generateToken(req.trip_id);
-    res.status(200).json({ trip: trip, token: token });
+const getSingleTrip = async (req, res) => {
+    const singleTrip = await Trip.findOne({_id:req.params.tripId});
+    const token = generateToken(req.tripId);
+    res.status(200).json({ singleTrip: singleTrip, token: token });
 };
-
 
 const create = (req, res) => {
     const location = req.body.location;
@@ -39,8 +37,7 @@ const create = (req, res) => {
 const TripsController = {
     create: create,
     getAllTrips: getAllTrips,
-    getOneTrip: getOneTrip, 
-
+    getSingleTrip: getSingleTrip, 
 }
 
 module.exports = TripsController;

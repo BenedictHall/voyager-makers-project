@@ -9,4 +9,6 @@ router.get("/", TripsController.getAllTrips);
 
 router.post("/newtrip", TripsController.create);
 
+router.get("/:tripId", TripsController.getSingleTrip);
+
 module.exports = router;
