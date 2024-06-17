@@ -24,7 +24,7 @@ app.use("/users", usersRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/trips", tripsRouter);
 app.use("/toDos", tokenChecker, toDoRouter);
-app.use("/flight", tokenChecker, flightRouter);
+app.use("/flight", flightRouter);
 
 // 404 Handler
 app.use((_req, res) => {
