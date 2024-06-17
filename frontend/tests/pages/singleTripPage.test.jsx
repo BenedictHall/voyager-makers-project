@@ -37,7 +37,7 @@ describe("Single Trip Page", () => {
         );
 
         const h3 = screen.getByTestId("singleTripHeader");
-        expect(h3.textContent).toEqual("Single Trip Information");
+        expect(h3.textContent).toEqual("Your Trip");
         await waitFor(() => {
             expect(screen.getByTestId("singleTripLocation").textContent).toEqual("Manchester");
         })
