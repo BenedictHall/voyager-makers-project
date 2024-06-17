@@ -1,9 +1,8 @@
 import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import { Trip } from "../../components/Trip/trip";
-
 import { getTrips } from "../../services/trips"
-import Navbar from "../../components/Navbar/navbar";
+
 
 export const ShowAllTrips = () => {
     const [trips, setTrips] = useState([]);
@@ -32,14 +31,13 @@ export const ShowAllTrips = () => {
 
     return (
         <>
-        <Navbar/>
-        <h2>show all my trips</h2>
-        <div> 
-            {trips.map((trip)=>(
-                <Trip trip={trip} token={token} key={trip._id}/>
-            ))}
-        </div>
-            
+            <h2>show all my trips</h2>
+            <div> 
+                {trips.map((trip)=>(
+                    <Trip trip={trip} token={token} key={trip._id}/>
+                ))}
+            </div>
+
         </>
     );
 };
