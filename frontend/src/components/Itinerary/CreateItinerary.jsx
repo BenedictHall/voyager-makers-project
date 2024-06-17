@@ -1,5 +1,5 @@
 import {  useState } from "react";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { createItinerary } from "../../services/itinerary";
 import { useRef } from "react";
 import { isDate } from "validator";
@@ -12,7 +12,7 @@ export const CreateItinerary = (props) => {
     const [startTime, setStartTime] = useState("");
     const [endTime, setEndTime] = useState("");
     const [error, setError] = useState("");
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
 
     const handleSubmit = async (event) => {
@@ -51,18 +51,17 @@ export const CreateItinerary = (props) => {
         }
 
         try {
-            console.log("date!!!!!: ", date);
-            console.log("startDateTime!!!!!: ", startDateTime);
-            console.log("endDateTime!!!!!: ", endDateTime);
-            console.log("startTime!!!!!: ", startTime);
-            console.log("endTime!!!!!: ", endTime);
+            // console.log("date!!!!!: ", date);
+            // console.log("startDateTime!!!!!: ", startDateTime);
+            // console.log("endDateTime!!!!!: ", endDateTime);
+            // console.log("startTime!!!!!: ", startTime);
+            // console.log("endTime!!!!!: ", endTime);
             await createItinerary(token, activity, date, startTime, endTime, tripId);
             activityRef.current.value = "";
             dateRef.current.value = "";
             setStartTime("");
             setEndTime("");
             setError("");
-            // navigate(`/trips/${tripId}`);
         } catch (err) {
             console.error(err);
             setError("An error occurred. Please try again later.");
@@ -82,22 +81,22 @@ export const CreateItinerary = (props) => {
         <form onSubmit={handleSubmit}>
             <div>
                 <label>Activity</label>
-                <input type="text" id="activity" ref={activityRef} />
+                <input type="text" id="activity" role="activity" ref={activityRef} />
             </div>
             <div>
-                <label>Date</label>
-                <input type="date" id="date" ref={dateRef} />
+                <label>Date:</label>
+                <input type="date" id="date" role="date" ref={dateRef} />
             </div>
             <div>
-                <label>Start Time</label>
-                <input type="time" id="startTime" value={startTime} onChange={handleStartTimeChange} />
+                <label>Start Time:</label>
+                <input type="time" id="startTime" role="start-time" value={startTime} onChange={handleStartTimeChange} />
             </div>
             <div>
-                <label>End Time</label>
-                <input type="time" id="endTime" value={endTime} onChange={handleEndTimeChange} />
+                <label>End Time:</label>
+                <input type="time" id="endTime" role="end-time" value={endTime} onChange={handleEndTimeChange} />
             </div>
             {error && <p role="error" className="error">{error}</p>}
-            <button type="submit">Create Itinerary</button>
+            <button type="submit" role="submit-button">Create Itinerary</button>
         </form>
     );
 

@@ -31,6 +31,7 @@ const App = () => {
       <Route element={<AuthLayout />}>
         <Route path="trips">
           <Route path=":tripId" element={<SingleTripPage />} />
+          <Route path=":tripId/createitinerary" element={<CreateItineraryPage />} />
           <Route path="newtrip" element={<AddNewTrip />} />
           <Route index element={<ShowAllTrips />} />
         </Route>
