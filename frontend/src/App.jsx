@@ -6,6 +6,7 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip";
 import { ShowAllTrips } from "./pages/Trips/tripsPage"
+import { CreateItineraryPage } from "./pages/Itinerary/CreateItineraryPage";
 
 import { Navbar } from './components/Navbar/navbar.jsx';
 
@@ -64,6 +65,7 @@ const App = () => {
             <Route path="/signup" element={<SignupPage/>}/>
             <Route path="/trips" element={<ShowAllTrips/>}/>
             <Route path="/trips/newtrip" element={<AddNewTrip/>}/>
+            <Route path="/createitinerary" element={<CreateItineraryPage/>}/>
 
           </Routes>
         </div>

@@ -4,6 +4,7 @@ import { CreateToDo } from "../../components/ToDo/CreateToDo";
 import { getAllToDos } from "../../services/todo";
 import { ToDo } from "../../components/ToDo/ToDo";
 
+
 export const DashboardPage = () => {
     const token = localStorage.getItem("token");
     const tripId = "666ac35161b167f06308d3f3";
