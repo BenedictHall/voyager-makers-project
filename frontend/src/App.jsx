@@ -5,9 +5,11 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip";
 import { ShowAllTrips } from "./pages/Trips/tripsPage"
-import { Dashboard } from "./pages/Dashboard/Dashboard";
+
 import { Navbar } from './components/Navbar/navbar.jsx';
 import { SingleTripPage } from "./pages/Trips/singleTripPage.jsx";
+
+import { DashboardPage } from "./pages/Dashboard/DashboardPage";
 
 
 // docs: https://reactrouter.com/en/main/start/overview
@@ -31,7 +33,7 @@ const App = () => {
           <Route path="newtrip" element={<AddNewTrip />} />
           <Route index element={<ShowAllTrips />} />
         </Route>
-        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/dashboard" element={<DashboardPage/>}/>
       </Route>
     </Routes>
   );
