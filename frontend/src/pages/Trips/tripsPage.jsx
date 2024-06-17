@@ -35,6 +35,7 @@ export const ShowAllTrips = () => {
         <Navbar/>
         <h2>show all my trips</h2>
         <div> 
+            {console.log('what is the budgets', trips)}
             {trips.map((trip)=>(
                 <Trip trip={trip} token={token} key={trip._id}/>
             ))}

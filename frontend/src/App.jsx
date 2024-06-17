@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider, Router, Route , Routes} from "react-router-dom";
+import { Route , Routes} from "react-router-dom";
 
 import "./App.css";
 import { HomePage } from "./pages/Home/HomePage";
@@ -10,6 +10,7 @@ import { ShowAllTrips } from "./pages/Trips/tripsPage"
 import { Navbar } from './components/Navbar/navbar.jsx';
 
 import { DashboardPage } from "./pages/Dashboard/DashboardPage";
+import { Budget } from "./pages/Budget/BudgetPage.jsx";
 
 
 // docs: https://reactrouter.com/en/main/start/overview
@@ -64,6 +65,7 @@ const App = () => {
             <Route path="/signup" element={<SignupPage/>}/>
             <Route path="/trips" element={<ShowAllTrips/>}/>
             <Route path="/trips/newtrip" element={<AddNewTrip/>}/>
+            <Route path="/budget" element={<Budget/>}/>
 
           </Routes>
         </div>

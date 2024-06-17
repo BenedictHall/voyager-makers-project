@@ -1,4 +1,5 @@
 export const Trip = (props) => {
+
     
     const tripId = props.trip._id 
     
