@@ -7,14 +7,13 @@ import { addExpense } from '../../services/expense';
 
 
 
-const AddExpenseForm = ()=> {
-
+const AddExpenseForm = (props)=> {
+    const budgetId = props.budgetId;
     const [formData, setFormData] = useState({
-        title: '',
+        description: '',
         amount: '',
         date: '',
         category: '',
-        description: '',
     })
 
     const handleChange = (event) => {
@@ -35,10 +34,10 @@ const AddExpenseForm = ()=> {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const token = localStorage.getItem("token");
-        const {title, amount, date, category, description} = formData;
+        const {description, amount, date, category,} = formData;
         
         try {
-            await addExpense(token, title, amount, date, category, description);
+            await addExpense(token, description, amount, date, category, budgetId);
         } catch (err) {
         console.error(err);
         }
@@ -47,15 +46,13 @@ const AddExpenseForm = ()=> {
     return (
         <>
         <form onSubmit={handleSubmit}>
-            <label htmlFor="title">Title:</label>
+        <label htmlFor="description">Description:</label>
                 <input
-                    id="title"
-                    type="text"
-                    name ="title"
-                    value={formData.title}
+                    id="description"
+                    name ="description"
+                    value={formData.description}
                     onChange={handleChange}
                 />
-            <br/>
             <label htmlFor="amount">Amount:</label>
                 <input
                     id="amount"
@@ -91,14 +88,6 @@ const AddExpenseForm = ()=> {
                     <option value="other">Other</option>
                 </select>
             <br/>
-            <label htmlFor="description">Description:</label>
-                <input
-                    id="description"
-                    name ="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                />
-            <br />
             <input role="submit-button" id="submit" type="submit" value="Submit" />
 
         </form>

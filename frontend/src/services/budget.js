@@ -1,14 +1,12 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-console.log(BACKEND_URL)
 
-export const addBudget = async (token, title, amount, date, category, description) => {
+
+export const addBudget = async (token, title, amount, tripId) => {
     const payload = {
         token: token,
         title: title,
         amount: amount,
-        date: date,
-        category: category,
-        description: description,
+        tripId: tripId,
     
     }
     console.log("this is payload", payload)
@@ -95,7 +93,6 @@ export const deleteBudget = async (token, budgetId) => {
     const payload = {
         budgetId: budgetId,
     };
-    console.log("this is line 75 payload", payload)
 
     const requestOptions = {
         method: "DELETE",
@@ -106,7 +103,7 @@ export const deleteBudget = async (token, budgetId) => {
         body: JSON.stringify(payload),
     };
 
-    const response = await fetch(`${BACKEND_URL}/budget/${budgetId}`, requestOptions);
+    const response = await fetch(`${BACKEND_URL}/budget`, requestOptions);
 
 
     if (response.status === 200) {
@@ -114,7 +111,7 @@ export const deleteBudget = async (token, budgetId) => {
         return data;
     } else {
         throw new Error(
-            `Unable to delete toDo. Received status ${response.status}. Expected 200`
+            `Unable to delete budget. Received status ${response.status}. Expected 200`
         );
     }
 };

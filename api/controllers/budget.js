@@ -3,18 +3,18 @@ const {generateToken} = require("../lib/token");
 
 
 const addBudget = async (req, res) => {
-    const {title, amount, date, category, description}  = req.body
+    const title = req.body.title;
+    const amount = req.body.amount;
+    const tripId = req.body.tripId;
 
-    const budget = BudgetSchema({
-        title,
-        amount,
-        date,
-        category,
-        description,
+    const budget = new BudgetSchema({
+        title: title,
+        amount: amount,
+        tripId: tripId,
     })
 
     try {
-        if(!title || !category || !description || !date){
+        if(!title){
             return res.status(400).json({message: 'All fields are required!'})
         }
         if(amount <= 0 || !amount === 'number'){
@@ -27,7 +27,7 @@ const addBudget = async (req, res) => {
         res.status(500).json({message: 'Server Error'})
     }
 
-    console.log(budget)
+    // console.log(budget)
 }
 
 const getBudgets = async (req, res) =>{
@@ -50,9 +50,9 @@ const getOneBudget = async (req, res) => {
 
 const updateBudget = async (req, res) => {
     const { budgetId } = req.params;
-    console.log('what is this req.params', req.params)
+    // console.log('what is this req.params', req.params)
     const budgetData = req.body;
-    console.log('what is this req.body', req.body)
+    // console.log('what is this req.body', req.body)
     try {
         const budget = await BudgetSchema.findById({_id:budgetId});
         budget.amount = budgetData.amount
@@ -64,17 +64,21 @@ const updateBudget = async (req, res) => {
 }
 
 const deleteBudget = async (req, res) =>{
-    const { budgetId } = req.params;
-    console.log("is this the id", req.params)
-    BudgetSchema.findByIdAndDelete(budgetId)
-        // console.log("show me the id", {id})
-        .then((budget) =>{
-            res.status(200).json({message: 'Budget Deleted'})
-        })
-        .catch((err) =>{
-            res.status(500).json({message: 'Server Error'})
-        })
-}
+    const budgetId = req.body.budgetId;
+    const newToken = generateToken(req.user_id);
+    try {
+        const budget = await BudgetSchema.findById(budgetId);
+        console.log("this is the budget!!!!", budget)
+        if (!budget) {
+            return res.status(404).json({ message: "Budget not found" });
+        }
+        await budget.deleteOne({ _id: budgetId});
+        res.status(200).json({ message: "Budget Deleted", token: newToken});
+    } catch (error) {
+        console.error(error);
+        res.status(400).json({ message: "Internal server error" });
+    }
+};
 
 const BudgetController = {
     addBudget:addBudget,

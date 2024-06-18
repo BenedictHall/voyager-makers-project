@@ -5,7 +5,7 @@ const router = express.Router();
 router.get("/", BudgetController.getBudgets);
 router.get("/:budgetId", BudgetController.getOneBudget)
 router.post("/", BudgetController.addBudget);
-router.delete("/:budgetId", BudgetController.deleteBudget);
+router.delete("/", BudgetController.deleteBudget);
 router.put("/:budgetId", BudgetController.updateBudget)
 
 module.exports = router;
