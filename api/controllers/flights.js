@@ -1,5 +1,6 @@
 const flightAPIService = require("../services/flightAPIService.js");
-const dateFormatting = require("../utils/dateFormatting.js")
+const dateFormatting = require("../utils/dateFormatting.js");
+const IATAtoCity = require("../data/IATAtoCity.js")
 
 const getAirline = async (req, res) => {
     const airlineCodes = req.params.airlineCodes;
@@ -26,9 +27,16 @@ const getFlight = async (req,res) => {
             const flightNumberResponse = data.data[i].flightDesignator.flightNumber;
             let segments = [];
             for (let n=0; n<data.data[i].segments.length; n++) {
-                const departureAirport = data.data[i].segments[n].boardPointIataCode;
-                const arrivalAirport = data.data[i].segments[n].offPointIataCode;
-                const carrier = data.data[i].segments[n].partnership.operatingFlight.carrierCode;
+                const departureAirportIATA = data.data[i].segments[n].boardPointIataCode;
+                const arrivalAirportIATA = data.data[i].segments[n].offPointIataCode;
+                console.log(departureAirportIATA, arrivalAirportIATA);
+                const departureAirport = IATAtoCity(departureAirportIATA);
+                const arrivalAirport = IATAtoCity(arrivalAirportIATA);
+                console.log(departureAirport, arrivalAirport)
+
+                const carrierCode = data.data[i].segments[n].partnership.operatingFlight.carrierCode;
+                const carrierData = await flightAPIService.getAirlineName(carrierCode);
+                const carrier = carrierData.data[0].commonName;
                 const segmentFlightNumber = data.data[i].segments[n].partnership.operatingFlight.flightNumber;
 
                 const flightDurationISO = data.data[i].segments[n].scheduledSegmentDuration;
@@ -44,25 +52,11 @@ const getFlight = async (req,res) => {
             }
             flightData.push({
                 "airline" : airline,
+                "airlineCode" : airlineCode,
                 "flightNumber" : flightNumberResponse,
                 "segments" : segments});
         }
 
-        // const flight = {
-        //     "flightNumber" : `${data.data[0].flightDesignator.carrierCode}${data.data[0].flightDesignator.flightNumber}`,
-        //     "scheduledDepartureDateTime" : data.data[0].flightPoints[0].departure.timings[0].value,
-        //     "scheduledArrivalDateTime" : data.data[0].flightPoints[1].arrival.timings[0].value,
-        //     // "departureAirport" : data.data[0].legs[0].boardPointIataCode,
-        //     // "arrivalAirport" : data.data[0].legs[0].offPointIataCode
-        // };
-        // const flight = {
-        //     "scheduledDepartureDate" : data.data.scheduledDepartureDate,
-        //     "flightNumber" : `${data.data.flightDesignator.carrierCode}${response.data.data.flightDesignator.flightNumber}`,
-        //     "scheduledDepartureDateTime" : data.data.flightPoints.departure.timings.value,
-        //     "scheduledArrivalDateTime" : data.data.flightPoints.arrival.timings.value,
-        //     "departureAirport" : data.data.legs.boardPointIataCode,
-        //     "arrivalAirport" : data.data.legs.offPointIataCode
-        // }
         res.status(200).json(flightData)
     } catch (error) {
         res.status(500).json({message: 'error fetching flight data', error});
