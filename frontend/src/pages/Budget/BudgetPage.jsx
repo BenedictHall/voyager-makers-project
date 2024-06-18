@@ -2,12 +2,13 @@ import AddBudgetForm from "../../components/Budget/BudgetForm"
 import BudgetItem from "../../components/Budget/BudgetItem"
 import { deleteBudget, getBudgets } from "../../services/budget"
 import { useState , useEffect} from "react"
+import { useParams } from "react-router-dom";
 
 
 
-export const Budget = () => {
+export const BudgetPage = () => {
     const [budgets, setBudgets] = useState([]);
-    const tripId = "66704704972d13f9256196b6"
+    let tripId = useParams().tripId
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -16,7 +17,7 @@ export const Budget = () => {
             getBudgets(token)
                 .then((data) => {
                     console.log('this is data', data)
-                    setBudgets(data.budgets);
+                    setBudgets(data.budgets.filter((budget) => {return budget.tripId == tripId}));
                     localStorage.setItem("token", data.token);
                 })
                 .catch((error) => {
@@ -55,4 +56,4 @@ export const Budget = () => {
     );
 };
 
-export default Budget;
+export default BudgetPage;

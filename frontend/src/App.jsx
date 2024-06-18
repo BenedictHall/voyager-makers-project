@@ -11,8 +11,8 @@ import { Navbar } from './components/Navbar/navbar.jsx';
 import { SingleTripPage } from "./pages/Trips/singleTripPage.jsx";
 
 import { DashboardPage } from "./pages/Dashboard/DashboardPage";
-import { Budget } from "./pages/Budget/BudgetPage.jsx";
-import Expense from "./pages/Expense/ExpensePage.jsx";
+import { BudgetPage } from "./pages/Budget/BudgetPage.jsx";
+import { ExpensePage } from "./pages/Expense/ExpensePage.jsx";
 
 
 // docs: https://reactrouter.com/en/main/start/overview
@@ -34,6 +34,8 @@ const App = () => {
         <Route path="trips">
           <Route path=":tripId" element={<SingleTripPage />} />
           <Route path=":tripId/createitinerary" element={<CreateItineraryPage />} />
+          <Route path=":tripId/budget" element={<BudgetPage />} />
+          <Route path=":tripId/budget/:budgetId" element={<ExpensePage />} />
           <Route path="newtrip" element={<AddNewTrip />} />
           <Route index element={<ShowAllTrips />} />
         </Route>

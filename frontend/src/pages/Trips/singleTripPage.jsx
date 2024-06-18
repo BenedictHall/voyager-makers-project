@@ -48,9 +48,9 @@ export function SingleTripPage () {
                 })
                 .catch((err) => {
                     console.error(err);
-                    navigate("/login");
+                    // navigate("/login");
                 });
-                console.log("HELLO");
+                
         }
     }, []);
 
@@ -63,7 +63,7 @@ export function SingleTripPage () {
                 })
                 .catch((err) => {
                     console.error(err);
-                    navigate("/login");
+                    // navigate("/login");
                 });
         }
     }, []);
@@ -91,6 +91,9 @@ export function SingleTripPage () {
             <h3 data-testid="singleTripHeader">Your Trip</h3>
             <SingleTripItem data={tripInformation} />
             <div>
+                <button onClick={() => navigate(`/trips/${tripId}/budget`)}>Budget</button>
+            </div>
+            <div>
                 <h3>Trip ToDo List:</h3>
                 <CreateToDo token={token} tripId={tripId} onToDoCreated={handleToDoCreated}/>
                 <div>
@@ -99,17 +102,6 @@ export function SingleTripPage () {
                     ))}
                 </div>
             </div>
-
-            {/* <div>
-                <h3>Trip Itinerary:</h3>
-                <button onClick={() => navigate(`/trips/${tripId}/createitinerary`)}>Add to Itinerary</button>
-                <div>
-                    {itineraries.filter((itinerary) => {return itinerary.tripId == tripId}).map((itinerary) => (
-                        <Itinerary key={itinerary._id} itinerary={itinerary} token={token} />
-                    ))}
-                </div>
-            </div> */}
-
             <div>
                 <h3>Trip Itinerary:</h3>
                 <button onClick={() => navigate(`/trips/${tripId}/createitinerary`)}>Add to Itinerary</button>
