@@ -10,7 +10,7 @@ import { CreateItineraryPage } from "./pages/Itinerary/CreateItineraryPage";
 import { Navbar } from './components/Navbar/navbar.jsx';
 import { SingleTripPage } from "./pages/Trips/singleTripPage.jsx";
 import { FlightTracker } from "./pages/Flights/FlightTracker.jsx";
-import { Dashboard } from "./pages/Dashboard/Dashboard.jsx";
+import { DashboardPage } from "./pages/Dashboard/DashboardPage.jsx";
 
 const AuthLayout = () => (
   <>
@@ -25,8 +25,9 @@ const App = () => {
       <Route path="/" element={<HomePage/>}/>
       <Route path="/login" element={<LoginPage/>}/>
       <Route path="/signup" element={<SignupPage/>}/>
-      <Route path="/flights" element={<FlightTracker/>}/>
+      
       <Route element={<AuthLayout />}>
+      <Route path="/flights" element={<FlightTracker/>}/>
         <Route path="trips">
           <Route path=":tripId" element={<SingleTripPage />} />
           <Route path=":tripId/createitinerary" element={<CreateItineraryPage />} />

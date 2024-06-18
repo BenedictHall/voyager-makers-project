@@ -17,7 +17,6 @@
     "react-clock": "^5.0.0",
     "react-date-picker": "^11.0.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.14.2",
     "react-time-picker": "^7.0.0",
     "validator": "^13.12.0"
   },
