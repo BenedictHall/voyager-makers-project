@@ -66,4 +66,88 @@ describe("CreateItinerary Component", () => {
         const errorMessage = screen.getByRole("error");
         expect(errorMessage.textContent).toEqual("Please enter an activity.");
     });
+
+    test("displays an error message when no date is provided", async () => {
+        render(<CreateItinerary token="mockToken" tripId="mockTripId"/>);
+
+        const user = userEvent.setup();
+        const activityInputEl = screen.getByRole("activity");
+        const submitButtonEl = screen.getByRole("submit-button");
+
+        await user.type(activityInputEl, "Test Activity");
+        await user.click(submitButtonEl);
+
+        const errorMessage = screen.getByRole("error");
+        expect(errorMessage.textContent).toEqual("Please enter a valid date.");
+    });
+
+    test("displays an error for a past date", async () => {
+        render(<CreateItinerary token="mockToken" tripId="mockTripId"/>);
+
+        const user = userEvent.setup();
+        const activityInputEl = screen.getByRole("activity");
+        const dateInputEl = screen.getByRole("date");
+        const submitButtonEl = screen.getByRole("submit-button");
+
+        await user.type(activityInputEl, "Test Activity");
+        await user.type(dateInputEl, "2020-01-01");
+        await user.click(submitButtonEl);
+
+        const errorMessage = screen.getByRole("error");
+        expect(errorMessage.textContent).toEqual("Please enter a future date.");
+    });
+
+    test("displays an error message when no start time is provided", async () => {
+        render(<CreateItinerary token="mockToken" tripId="mockTripId"/>);
+
+        const user = userEvent.setup();
+        const activityInputEl = screen.getByRole("activity");
+        const dateInputEl = screen.getByRole("date");
+        const submitButtonEl = screen.getByRole("submit-button");
+
+        await user.type(activityInputEl, "Test Activity");
+        await user.type(dateInputEl, "2024-12-31");
+        await user.click(submitButtonEl);
+
+        const errorMessage = screen.getByRole("error");
+        expect(errorMessage.textContent).toEqual("Please enter a start time.");
+    });
+
+    test("displays an error message when no end time is provided", async () => {
+        render(<CreateItinerary token="mockToken" tripId="mockTripId"/>);
+
+        const user = userEvent.setup();
+        const activityInputEl = screen.getByRole("activity");
+        const dateInputEl = screen.getByRole("date");
+        const startTimeInputEl = screen.getByRole("start-time");
+        const submitButtonEl = screen.getByRole("submit-button");
+
+        await user.type(activityInputEl, "Test Activity");
+        await user.type(dateInputEl, "2024-12-31");
+        await user.type(startTimeInputEl, "12:00");
+        await user.click(submitButtonEl);
+
+        const errorMessage = screen.getByRole("error");
+        expect(errorMessage.textContent).toEqual("Please enter an end time.");
+    });
+
+    test("displays an error message when the end time is before the start time", async () => {
+        render(<CreateItinerary token="mockToken" tripId="mockTripId"/>);
+
+        const user = userEvent.setup();
+        const activityInputEl = screen.getByRole("activity");
+        const dateInputEl = screen.getByRole("date");
+        const startTimeInputEl = screen.getByRole("start-time");
+        const endTimeInputEl = screen.getByRole("end-time");
+        const submitButtonEl = screen.getByRole("submit-button");
+
+        await user.type(activityInputEl, "Test Activity");
+        await user.type(dateInputEl, "2024-12-31");
+        await user.type(startTimeInputEl, "14:00");
+        await user.type(endTimeInputEl, "12:00");
+        await user.click(submitButtonEl);
+
+        const errorMessage = screen.getByRole("error");
+        expect(errorMessage.textContent).toEqual("Please enter a valid time range.");
+    });
 });

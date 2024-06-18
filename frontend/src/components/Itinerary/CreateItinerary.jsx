@@ -45,17 +45,22 @@ export const CreateItinerary = (props) => {
             return;
         }
 
+        if (startTime.length < 1) {
+            setError("Please enter a start time.");
+            return;
+        }
+
+        if (endTime.length < 1) {
+            setError("Please enter an end time.");
+            return;
+        }
+
         if (startDateTime > endDateTime) {
             setError("Please enter a valid time range.");
             return;
         }
 
         try {
-            // console.log("date!!!!!: ", date);
-            // console.log("startDateTime!!!!!: ", startDateTime);
-            // console.log("endDateTime!!!!!: ", endDateTime);
-            // console.log("startTime!!!!!: ", startTime);
-            // console.log("endTime!!!!!: ", endTime);
             await createItinerary(token, activity, date, startTime, endTime, tripId);
             activityRef.current.value = "";
             dateRef.current.value = "";

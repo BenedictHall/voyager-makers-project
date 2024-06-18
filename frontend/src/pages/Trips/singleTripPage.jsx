@@ -43,7 +43,7 @@ export function SingleTripPage () {
         if (token) {
             getAllItineraries(token)
                 .then((data) => {
-                    setItineraries(data.itineraries);
+                    setItineraries(data.itineraries.filter((itinerary) => {return itinerary.tripId == tripId}));
                     localStorage.setItem("token", data.token);
                 })
                 .catch((err) => {
@@ -73,6 +73,19 @@ export function SingleTripPage () {
         window.location.reload();
     };
 
+    const groupByDate = (itineraries) => {
+        return itineraries.reduce((acc, itinerary) => {
+            const date = new Date(itinerary.date).toLocaleDateString();
+            if (!acc[date]) {
+                acc[date] = [];
+            }
+            acc[date].push(itinerary);
+            return acc;
+        }, {});
+    };
+
+    const groupedItineraries = groupByDate(itineraries);
+
     return(
         <>
             <h3 data-testid="singleTripHeader">Your Trip</h3>
@@ -87,12 +100,27 @@ export function SingleTripPage () {
                 </div>
             </div>
 
-            <div>
+            {/* <div>
                 <h3>Trip Itinerary:</h3>
                 <button onClick={() => navigate(`/trips/${tripId}/createitinerary`)}>Add to Itinerary</button>
                 <div>
                     {itineraries.filter((itinerary) => {return itinerary.tripId == tripId}).map((itinerary) => (
                         <Itinerary key={itinerary._id} itinerary={itinerary} token={token} />
+                    ))}
+                </div>
+            </div> */}
+
+            <div>
+                <h3>Trip Itinerary:</h3>
+                <button onClick={() => navigate(`/trips/${tripId}/createitinerary`)}>Add to Itinerary</button>
+                <div>
+                    {Object.keys(groupedItineraries).map((date) => (
+                        <div key={date}>
+                            <h4>{date}</h4>
+                            {groupedItineraries[date].map((itinerary) => (
+                                <Itinerary key={itinerary._id} itinerary={itinerary} token={token} />
+                            ))}
+                        </div>
                     ))}
                 </div>
             </div>
