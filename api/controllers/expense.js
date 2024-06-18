@@ -1,15 +1,17 @@
 const ExpenseSchema = require("../models/expense")
+const {generateToken} = require("../lib/token");
 
 
 const addExpense = async (req, res) => {
-    const {title, amount, category, description, date}  = req.body
+    const {title, amount, date, category, description}  = req.body
 
-    const budget = ExpenseSchema({
+    const expense = ExpenseSchema({
         title,
         amount,
+        date,
         category,
         description,
-        date
+        
     })
 
     try {
@@ -20,19 +22,20 @@ const addExpense = async (req, res) => {
         if(amount <= 0 || !amount === 'number'){
             return res.status(400).json({message: 'Amount must be a positive number!'})
         }
-        await budget.save()
+        await expense.save()
         res.status(201).json({message: 'Expense Added'})
     } catch (error) {
         res.status(500).json({message: 'Server Error'})
     }
 
-    console.log(budget)
+    console.log(expense)
 }
 
 const getExpenses = async (req, res) =>{
     try {
-        const budgets = await ExpenseSchema.find().sort({createdAt: -1})
-        res.status(200).json(budgets)
+        const expenses = await ExpenseSchema.find().sort({createdAt: -1})
+        const token = generateToken(req.user_id);
+        res.status(200).json({expenses:expenses, token:token})
     } catch (error) {
         res.status(500).json({message: 'Server Error'})
     }
@@ -40,8 +43,11 @@ const getExpenses = async (req, res) =>{
 
 const deleteExpense = async (req, res) =>{
     const {id} = req.params;
+    console.log ()
+    console.log("is this the id", req.params)
     ExpenseSchema.findByIdAndDelete(id)
-        .then((budget) =>{
+        // console.log("show me the id", {id})
+        .then((expense) =>{
             res.status(200).json({message: 'Expense Deleted'})
         })
         .catch((err) =>{

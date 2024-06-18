@@ -3,8 +3,9 @@ const BudgetController = require("../controllers/budget");
 const router = express.Router();
 
 router.get("/", BudgetController.getBudgets);
-router.get("/getOnebudget", BudgetController.getOneBudget)
+router.get("/:budgetId", BudgetController.getOneBudget)
 router.post("/", BudgetController.addBudget);
-router.delete("/:id", BudgetController.deleteBudget);
+router.delete("/:budgetId", BudgetController.deleteBudget);
+router.put("/:budgetId", BudgetController.updateBudget)
 
 module.exports = router;

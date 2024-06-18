@@ -8,6 +8,7 @@ const ExpenseSchema = new mongoose.Schema({
     date: {type: Date, required: true, trim: true},
     category: {type: String, required: true, trim: true},
     description: {type: String, required: true, maxLength: 20, trim: true},
+    budgetId: { type: mongoose.Schema.Types.ObjectId, ref: "Budget" }
 }, {timestamps: true})
 
 module.exports = mongoose.model('Expense', ExpenseSchema)

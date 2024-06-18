@@ -4,6 +4,7 @@ import { deleteBudget, getBudgets } from "../../services/budget"
 import { useState , useEffect} from "react"
 
 
+
 export const Budget = () => {
     const [budgets, setBudgets] = useState([]);
 
@@ -30,24 +31,28 @@ export const Budget = () => {
     }
 
     return (
-        <>
+        <div className="InnerLayout">
             <h1>My Budget</h1>
+            
             <AddBudgetForm />
             {console.log('what is the budgets', budgets)}
-            {budgets && budgets.length > 0 ? (
-                budgets.map((budget)=>(
-                <BudgetItem
-                key={budget._id}
-                title={budget.title}
-                amount={budget.amount}
-                description={budget.description}
-                // deleteItem={deleteBudget}
-            />
-            ))
-        ): (
-            <p>No budgets to display.</p>
-        )} 
-        </>
+            <div >
+                {budgets && budgets.length > 0 ? (
+                    budgets.map((budget)=>(
+                    <BudgetItem
+                    key={budget._id}
+                    title={budget.title}
+                    amount={budget.amount}
+                    date={budget.date}
+                    description={budget.description}
+                    // deleteItem={deleteBudget}
+                />
+                ))
+                ): (
+                <p>No budgets to display.</p>
+                )} 
+            </div>
+        </div>
     );
 };
 

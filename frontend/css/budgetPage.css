@@ -1,0 +1,9 @@
+.InnerLayout{
+    padding: 2rem 1.5rem;
+    width: 100%;
+}
+
+.budget-items{
+    border-style: double;
+    border-color: black;
+}
