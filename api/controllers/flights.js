@@ -1,8 +1,10 @@
 const flightAPIService = require("../services/flightAPIService.js");
 const dateFormatting = require("../utils/dateFormatting.js");
-const IATAtoCity = require("../data/IATAtoCity.js")
+const IATAtoCity = require("../data/IATAtoCity.js");
+const Flight = require ("../models/flight.js");
+const { generateToken } = require("../lib/token.js");
 
-const getAirline = async (req, res) => {
+const getAirlineFromAPI = async (req, res) => {
     const airlineCodes = req.params.airlineCodes;
     try {
         const data = await flightAPIService.getAirlineName(airlineCodes);
@@ -12,7 +14,7 @@ const getAirline = async (req, res) => {
     }
 }
 
-const getFlight = async (req,res) => {
+const getFlightFromAPI = async (req,res) => {
     const {carrierCode, flightNumber, scheduledDepartureDate} = req.params;
 
     try {
@@ -63,9 +65,36 @@ const getFlight = async (req,res) => {
     }
 };
 
+const getAllTrackedFlights  = async (req, res) => {
+    const flights = await Flight.find();
+    const token = generateToken(req.user_id);
+    res.status(200).json({ flights: flights, token: token });
+};
+
+const create = (req, res) => {
+    const carrierCode = req.body.carrierCode;
+    const flightNumber = req.body.flightNumber;
+    const departureDate = req.body.departureDate;
+    console.log("Now trying to save", carrierCode, flightNumber, departureDate)
+    const flight = new Flight({ carrierCode, flightNumber, departureDate });
+    flight
+        .save()
+        .then((flight) => {
+            console.log("Flight added to your saved flights, id: ", flight._id.toString());
+            res.status(201).json({ message: "OK"});
+        })
+        .catch((err) => {
+            // console.error(err);
+        
+            res.status(400).json({message: "Something went wrong with flight controller"});
+        });
+};
+
 const FlightsController = {
-    getFlight: getFlight,
-    getAirline: getAirline
+    getFlightFromAPI: getFlightFromAPI,
+    getAirlineFromAPI: getAirlineFromAPI,
+    getAllTrackedFlights: getAllTrackedFlights,
+    create: create
 };
 
 module.exports = FlightsController;

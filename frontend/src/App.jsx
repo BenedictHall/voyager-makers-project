@@ -5,20 +5,17 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip";
 import { ShowAllTrips } from "./pages/Trips/tripsPage"
-
 import { Navbar } from './components/Navbar/navbar.jsx';
 import { SingleTripPage } from "./pages/Trips/singleTripPage.jsx";
+import { FlightTracker } from "./pages/Flights/FlightTracker.jsx";
+import { Dashboard } from "./pages/Dashboard/Dashboard.jsx";
 
-
-import { DashboardPage } from "./pages/Dashboard/DashboardPage";
-import { FlightTracker } from "./pages/Transport/FlightTracker.jsx";
 const AuthLayout = () => (
   <>
     <Navbar/>
     <Outlet />
   </>
 )
-
 
 const App = () => {
   return (
@@ -33,7 +30,7 @@ const App = () => {
           <Route index element={<ShowAllTrips />} />
         </Route>
         <Route path="/dashboard" element={<Dashboard/>}/>
-        <Route path="/flight" element={<FlightTracker/>}/>
+        <Route path="/flights" element={<FlightTracker/>}/>
       </Route>
     </Routes>
   );

@@ -15,7 +15,8 @@ export const trackNewFlight = async (token, carrierCode, flightNumber, departure
         },
         body:JSON.stringify(payload),
     };
-    let response = await fetch(`${BACKEND_URL}/flights/newflight`, requestOptions);
+    console.log("request options", requestOptions)
+    let response = await fetch(`${BACKEND_URL}/flights/saveNewFlight`, requestOptions);
     if (response.status !== 201) {
         throw new Error("Unable to save this flight");
     } else {

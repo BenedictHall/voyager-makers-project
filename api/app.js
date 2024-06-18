@@ -24,7 +24,7 @@ app.use("/users", usersRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/trips", tripsRouter);
 app.use("/toDos", tokenChecker, toDoRouter);
-app.use("/flight", flightRouter);
+app.use("/flights", flightRouter);
 
 // 404 Handler
 app.use((_req, res) => {
@@ -37,7 +37,7 @@ app.use((err, _req, res, _next) => {
   if (process.env.NODE_ENV === "development") {
     res.status(500).send(err.message);
   } else {
-    res.status(500).json({ err: "Something went wrong" });
+    res.status(500).json({ err: "Something went wrong with app" });
   }
 });
 
