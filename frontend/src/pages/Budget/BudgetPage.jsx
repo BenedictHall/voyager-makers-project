@@ -7,6 +7,7 @@ import { useState , useEffect} from "react"
 
 export const Budget = () => {
     const [budgets, setBudgets] = useState([]);
+    const tripId = "66704704972d13f9256196b6"
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -24,6 +25,11 @@ export const Budget = () => {
         }
     }, []);
 
+    const handleBudgetCreated = (newBudget) => {
+        setBudgets((prevBudgets) => [newBudget, ...prevBudgets]);
+        window.location.reload();
+    };
+
 
     const token = localStorage.getItem("token");
     if (!token) {
@@ -34,19 +40,12 @@ export const Budget = () => {
         <div className="InnerLayout">
             <h1>My Budget</h1>
             
-            <AddBudgetForm />
-            {console.log('what is the budgets', budgets)}
+            <AddBudgetForm tripId={tripId} onBudgetCreated={handleBudgetCreated}/>
+            <h2>My Budgets:</h2>
             <div >
                 {budgets && budgets.length > 0 ? (
                     budgets.map((budget)=>(
-                    <BudgetItem
-                    key={budget._id}
-                    title={budget.title}
-                    amount={budget.amount}
-                    date={budget.date}
-                    description={budget.description}
-                    // deleteItem={deleteBudget}
-                />
+                    <BudgetItem token={token} key={budget._id} budget={budget}/>
                 ))
                 ): (
                 <p>No budgets to display.</p>

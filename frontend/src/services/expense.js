@@ -1,17 +1,15 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
-console.log(BACKEND_URL)
 
-export const addExpense = async (token, title, amount, date, category, description) => {
+export const addExpense = async (token, description, amount, date, category, budgetId) => {
     const payload = {
         token: token,
-        title: title,
+        description: description,
         amount: amount,
         date: date,
         category: category,
-        description: description,
+        budgetId: budgetId,
     
     }
-    console.log("this is payload", payload)
     const requestOptions = {
         method:'POST',
         headers: {
@@ -68,7 +66,7 @@ export const getExpenses = async (token) => {
 // return data;
 // };
 
-export const deleteBudget = async (token, expenseId) => {
+export const deleteExpense = async (token, expenseId) => {
     const payload = {
         expenseId: expenseId,
     };
@@ -83,7 +81,7 @@ export const deleteBudget = async (token, expenseId) => {
         body: JSON.stringify(payload),
     };
 
-    const response = await fetch(`${BACKEND_URL}/expense/${expenseId}`, requestOptions);
+    const response = await fetch(`${BACKEND_URL}/expense`, requestOptions);
 
 
     if (response.status === 200) {
