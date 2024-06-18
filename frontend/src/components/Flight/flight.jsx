@@ -1,13 +1,8 @@
-export const Flight = () => {
+export const Flight = (props) => {
 
     return (
         <div>
-            <h2>Flight Number</h2>
-            <p>Airline</p>
-            <p>Departure Airport - Arrival Airport</p>
-            <p>Departure Time - Arrival Time</p>
-            <p>Status</p>
-
+            <p>{props.flight}</p>
         </div>
     )
 
