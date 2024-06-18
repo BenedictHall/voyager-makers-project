@@ -4,7 +4,7 @@ const dateFormat = (date) =>{
     return moment(date).format('DD/MM/YYYY')
 }
 
-function BudgetItem ({id, title, amount, date, description}) {
+function ExpenseItem ({id, title, amount, date, description}) {
     console.log("Deleting item with id:", id);
 
     return(
@@ -25,4 +25,4 @@ function BudgetItem ({id, title, amount, date, description}) {
     )
 }
 
-export default BudgetItem
+export default ExpenseItem
