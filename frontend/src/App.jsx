@@ -12,8 +12,8 @@ import { Navbar } from './components/Navbar/navbar.jsx';
 import { SingleTripPage } from "./pages/Trips/singleTripPage.jsx";
 import { FlightTracker } from "./pages/Flights/FlightTracker.jsx";
 import { DashboardPage } from "./pages/Dashboard/DashboardPage.jsx";
-import { Budget } from "./pages/Budget/BudgetPage.jsx";
-import Expense from "./pages/Expense/ExpensePage.jsx";
+import { BudgetPage } from "./pages/Budget/BudgetPage.jsx";
+import { ExpensePage } from "./pages/Expense/ExpensePage.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AuthLayout = () => (
@@ -25,31 +25,22 @@ const AuthLayout = () => (
 
 const App = () => {
   return (
-    <>
-      {/* <Router> */}
-        {/* <Navbar /> */}
-        {/* <Routes>
-          <Route path= "/dashboard" element= {<Dashboard />}/>
-          <Route path= "/login" element= {<LoginPage />}/>
-        </Routes> */}
-      {/* </Router> */}
-      {/* <RouterProvider router={router} />
-        <Navbar/> */}
-        <div className = "App">
-          <Navbar/>
-          <Routes>
-            <Route path="/" element={<HomePage/>}/>
-            <Route path="/dashboard" element={<DashboardPage/>}/>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/signup" element={<SignupPage/>}/>
-            <Route path="/trips" element={<ShowAllTrips/>}/>
-            <Route path="/trips/newtrip" element={<AddNewTrip/>}/>
-            <Route path="/budget" element={<Budget/>}/>
-            <Route path="/expense" element={<Expense/>}/>
-
-          </Routes>
-        </div>
-    </>
+    <Routes>
+      <Route path="/" element={<HomePage/>}/>
+      <Route path="/login" element={<LoginPage/>}/>
+      <Route path="/signup" element={<SignupPage/>}/>
+      <Route element={<AuthLayout />}>
+        <Route path="trips">
+          <Route path=":tripId" element={<SingleTripPage />} />
+          <Route path=":tripId/createitinerary" element={<CreateItineraryPage />} />
+          <Route path=":tripId/budget" element={<BudgetPage />} />
+          <Route path=":tripId/budget/:budgetId" element={<ExpensePage />} />
+          <Route path="newtrip" element={<AddNewTrip />} />
+          <Route index element={<ShowAllTrips />} />
+        </Route>
+        <Route path="/dashboard" element={<DashboardPage/>}/>
+      </Route>
+    </Routes>
   );
 }
 

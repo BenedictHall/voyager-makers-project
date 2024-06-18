@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { deleteBudget } from '../../services/budget'
+import { useParams } from "react-router-dom";
 
 
 function BudgetItem (props) {
@@ -7,6 +8,7 @@ function BudgetItem (props) {
     const budgetId = props.budget._id;
     const amount = props.budget.amount;
     const title = props.budget.title;
+    let tripId = useParams().tripId;
     
 
     
@@ -24,9 +26,9 @@ function BudgetItem (props) {
             <h5>{title}</h5>
                 <div className="inner-content">
                     <div className="text">
-                        <p>Total: {amount}</p>
+                        <p>Total: £{amount}</p>
                         <p>Remaining: </p>
-                        <a href={`/budget/${budgetId}`}>View Expenses</a>
+                        <a href={`/trips/${tripId}/budget/${budgetId}`}>View Expenses</a>
                         <div>
                         <button onClick={handleDeleteBudget}>Delete</button>
                         </div>

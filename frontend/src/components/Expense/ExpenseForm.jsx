@@ -37,7 +37,8 @@ const AddExpenseForm = (props)=> {
         const {description, amount, date, category,} = formData;
         
         try {
-            await addExpense(token, description, amount, date, category, budgetId);
+            const newExpense =await addExpense(token, description, amount, date, category, budgetId);
+            props.onExpenseCreated(newExpense);
         } catch (err) {
         console.error(err);
         }
@@ -80,12 +81,12 @@ const AddExpenseForm = (props)=> {
                     onChange={handleChange}
                 >
                     <option value="">Select a category</option>
-                    <option value="foodandDrink">Food and Drink</option>
-                    <option value="transport">Transport</option>
-                    <option value="accommodation">Accommodation</option>
-                    <option value="parkingfee">Parking fees</option>
-                    <option value="carExpense">Car Expenses</option>
-                    <option value="other">Other</option>
+                    <option value="Food and Drink">Food and Drink</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Accommodation">Accommodation</option>
+                    <option value="Parking Fee">Parking fees</option>
+                    <option value="Car Expense">Car Expenses</option>
+                    <option value="Other">Other</option>
                 </select>
             <br/>
             <input role="submit-button" id="submit" type="submit" value="Submit" />

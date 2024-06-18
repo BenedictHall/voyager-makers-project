@@ -25,12 +25,11 @@ function ExpenseItem (props) {
 
     return(
         <>
-            <h5>{title}</h5>
                 <div className="inner-content">
                     <div className="text">
                         <p>{category}</p>
                         <p>{description}</p>
-                        <p>{amount}</p>
+                        <p>£{amount}</p>
                         <p>{dateFormat(date)}</p>
                         <div>
                         <button onClick={handleDeleteExpense}>Delete</button>
