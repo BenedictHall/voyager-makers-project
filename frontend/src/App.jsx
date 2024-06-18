@@ -5,6 +5,7 @@ import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip";
 import { ShowAllTrips } from "./pages/Trips/tripsPage"
+import { CreateItineraryPage } from "./pages/Itinerary/CreateItineraryPage";
 
 import { Navbar } from './components/Navbar/navbar.jsx';
 import { SingleTripPage } from "./pages/Trips/singleTripPage.jsx";
@@ -30,6 +31,7 @@ const App = () => {
       <Route element={<AuthLayout />}>
         <Route path="trips">
           <Route path=":tripId" element={<SingleTripPage />} />
+          <Route path=":tripId/createitinerary" element={<CreateItineraryPage />} />
           <Route path="newtrip" element={<AddNewTrip />} />
           <Route index element={<ShowAllTrips />} />
         </Route>
