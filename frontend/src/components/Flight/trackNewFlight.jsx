@@ -62,45 +62,59 @@ export const TrackNewFlight = () => {
 
     return (
         <>
-        <h2>Track Flight</h2>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="carrierCode">Carrier code:</label>
-                <input
-                    id="carrierCode"
-                    type="text"
-                    name ="carrierCode"
-                    value={formData.carrierCode}
-                    onChange={handleChange}
-                />
-            <label htmlFor="flightNumber">Flight Number: </label>
-                <input
-                    id="flightNumber"
-                    type="text"
-                    name ="flightNumber"
-                    value={formData.flightNumber}
-                    onChange={handleChange}
-                />
-            <label htmlFor="departureDate">Departure Date: </label>
-                <input
-                    id="departureDate"
-                    type="date"
-                    name ="departureDate"
-                    value={formData.departureDate}
-                    onChange={handleChange}
-                />
-                <input role="submit-button" id="submit" type="submit" value="Submit" />
-        </form>
-            <div>
-            {myError !== "" && (
-                <p>Could not get data from external API</p>
-            )}
-            {APIresponse.length !== 0 && (
-                <div>
-                    <h3>Flight information</h3>
-                        <FlightAPICard flight={APIresponse}/>
-                        <button role="save-button" id="save" type="save" value="Save" onClick={handleSave}> Save </button>
+        <div className="container mt-5">
+            <div className="card">
+                <div className="card-header">
+                    <h2>Track New Flight</h2>
                 </div>
-            )}
+                <div className="card-body">
+                    <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                            <label htmlFor="carrierCode">Carrier code:</label>
+                                <input
+                                    id="carrierCode"
+                                    type="text"
+                                    name ="carrierCode"
+                                    value={formData.carrierCode}
+                                    onChange={handleChange}
+                                />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="flightNumber">Flight Number: </label>
+                                <input
+                                    id="flightNumber"
+                                    type="text"
+                                    name ="flightNumber"
+                                    value={formData.flightNumber}
+                                    onChange={handleChange}
+                                />
+                        </div>
+                        <div className="mb-3">
+                            <label htmlFor="departureDate">Departure Date: </label>
+                                <input
+                                    id="departureDate"
+                                    type="date"
+                                    name ="departureDate"
+                                    value={formData.departureDate}
+                                    onChange={handleChange}
+                                />
+                        </div>
+                        <input role="submit-button" id="submit" type="submit" value="Submit" />
+                    </form>
+                    <div>
+                    {myError !== "" && (
+                        <p>Could not get data from external API</p>
+                    )}
+                    {APIresponse.length !== 0 && (
+                        <div>
+                            <h3>Flight information</h3>
+                                <FlightAPICard flight={APIresponse}/>
+                                <button role="save-button" id="save" type="save" value="Save" onClick={handleSave}> Save </button>
+                        </div>
+                    )}
+                    </div>
+                    </div>
+                </div>
             </div>
         </>
     );
