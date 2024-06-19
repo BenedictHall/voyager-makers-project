@@ -15,6 +15,7 @@ describe("ToDo model", () => {
         description: "Buy milk, eggs, and bread",
         dueDate: new Date(),
         isCompleted: false,
+        isNotified: false,
         userId: userId,
         tripId: tripId,
         });
@@ -23,6 +24,7 @@ describe("ToDo model", () => {
         expect(toDo.description).toEqual("Buy milk, eggs, and bread");
         expect(toDo.dueDate).toEqual(toDo.dueDate);
         expect(toDo.isCompleted).toEqual(false);
+        expect(toDo.isNotified).toEqual(false);
         expect(toDo.userId).toEqual(userId);
         expect(toDo.tripId).toEqual(tripId);
     });
@@ -36,6 +38,7 @@ describe("ToDo model", () => {
         description: "Buy milk, eggs, and bread",
         dueDate: new Date(),
         isCompleted: false,
+        isNotified: false,
         userId: userId,
         tripId: tripId,
         });
@@ -47,6 +50,7 @@ describe("ToDo model", () => {
         expect(toDos[0].description).toEqual("Buy milk, eggs, and bread");
         expect(toDos[0].dueDate).toEqual(toDo.dueDate);
         expect(toDos[0].isCompleted).toEqual(false);
+        expect(toDos[0].isNotified).toEqual(false);
         expect(toDos[0].userId).toEqual(userId);
         expect(toDos[0].tripId).toEqual(tripId);
     });

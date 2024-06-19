@@ -1,4 +1,3 @@
-
 const Notification = require("../models/notification.js");
 
 const getAllNotifications = async (req, res) => {
@@ -19,9 +18,15 @@ const getUnreadNotificationsCount = async (req, res) => {
     res.status(200).json({ count });
 };
 
+const markNotificationsAsRead = async (req, res) => {
+    await Notification.updateMany({ isRead: false, userId: req.params.userId }, { isRead: true });
+    res.status(200).send();
+};
+
 const NotificationsController = {
     getUnreadNotificationsCount: getUnreadNotificationsCount,
     getAllNotifications: getAllNotifications,
+    markNotificationsAsRead: markNotificationsAsRead,
 }
 
 module.exports = NotificationsController;
