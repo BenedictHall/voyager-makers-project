@@ -102,8 +102,10 @@ const checkTodo = async () => {
     });
 
     if (notifications.length) {
-        Notification.insertMany(notifications);
-        ToDo.updateMany({ _id: { $in: updatedTodos }}, { isNotified: true });
+        await Promise.all([
+            Notification.insertMany(notifications),
+            ToDo.updateMany({ _id: { $in: updatedTodos }}, { isNotified: true })
+        ]);
     }
 };
 
