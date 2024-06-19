@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { saveFlight, getFlightFromAPI } from "../../services/flights";
-import {Flight} from "../Flight/flight"
+import {FlightAPICard} from "../../components/Flight/flightAPICard"
 
 export const TrackNewFlight = () => {
     const [formData, setFormData] = useState({
@@ -90,11 +90,10 @@ export const TrackNewFlight = () => {
             {APIresponse.length !== 0 && (
                 <div>
                     <h3>Flight information</h3>
-                        <Flight flight={APIresponse}/>
+                        <FlightAPICard flight={APIresponse}/>
                         <button role="save-button" id="save" type="save" value="Save" onClick={handleSave}> Save </button>
                 </div>
             )}
-            {APIresponse.length === 0 && (<p>No results recieved yet.</p>)}
             </div>
         </>
     );

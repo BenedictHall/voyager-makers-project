@@ -27,7 +27,6 @@ const getFlightFromAPI = async (req,res) => {
             const airlineCode = data.data[i].flightDesignator.carrierCode;
             const airlineData = await flightAPIService.getAirlineName(airlineCode);
             const airline = airlineData.data[0].commonName;
-
             const flightNumberResponse = data.data[i].flightDesignator.flightNumber;
             let segments = [];
             for (let n=0; n<data.data[i].segments.length; n++) {

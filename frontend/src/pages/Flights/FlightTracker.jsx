@@ -1,11 +1,13 @@
-import {Flight} from "../../components/Flight/flight"
+// import {Flight} from "../../components/Flight/flight"
 import {TrackNewFlight} from "../../components/Flight/trackNewFlight"
 import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import {getTrackedFlights } from "../../services/flights"
+import {FlightDBCard} from "../../components/Flight/flightDBCard";
 
 export const FlightTracker = () => {
     const [flights, setFlights] = useState([]);
+    console.log("flights usestate", flights)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -14,6 +16,7 @@ export const FlightTracker = () => {
             getTrackedFlights(token)
             .then((data) => {
                 setFlights(data.flights);
+                console.log("Flights", data.flights)
                 localStorage.setItem("token", data.token);
             })
             .catch((error) => {
@@ -33,9 +36,10 @@ return (
         <TrackNewFlight/>
         <h2>Your upcoming flights</h2>
         <div>
-            {/* {flights.map((flight)=> (
-                <Flight flight={flight} token={token} key={flight._id}/>
-            ))} */}
+            {flights.map((flight)=> (
+                <FlightDBCard flight={flight} token={token} key={flight._id}/>
+                // <p>{flight.airline}</p>
+            ))}
         </div>
     </div>
 )
