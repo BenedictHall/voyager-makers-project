@@ -33,9 +33,9 @@ return (
         <TrackNewFlight/>
         <h2>Your upcoming flights</h2>
         <div>
-            {flights.map((flight)=> (
+            {/* {flights.map((flight)=> (
                 <Flight flight={flight} token={token} key={flight._id}/>
-            ))}
+            ))} */}
         </div>
     </div>
 )

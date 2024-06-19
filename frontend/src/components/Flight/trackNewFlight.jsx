@@ -1,6 +1,7 @@
 import {useState} from "react";
 import {useNavigate} from "react-router-dom";
 import { saveFlight, getFlightFromAPI } from "../../services/flights";
+import {Flight} from "../Flight/flight"
 
 export const TrackNewFlight = () => {
     const [formData, setFormData] = useState({
@@ -9,16 +10,17 @@ export const TrackNewFlight = () => {
         departureDate: '',
     })
     const [APIresponse, setAPIResponse] = useState([]);
+    console.log("api response usestate",APIresponse);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
         const {carrierCode, flightNumber, departureDate} = formData;
         try {
-            const response = await getFlightFromAPI(carrierCode, flightNumber, departureDate);
-            console.log(response)
+            const response = await getFlightFromAPI(carrierCode, flightNumber, departureDate)
             setAPIResponse(response);
-            console.log(APIresponse)
+            console.log("actual API response",response);
+            
         } catch (err) {
             console.log(err);
             throw new Error("Could not get flight data from external API");
@@ -76,14 +78,7 @@ export const TrackNewFlight = () => {
             {APIresponse.length !== 0 && (
                 <div>
                     <h3>Flight information</h3>
-                        <p>{APIresponse[0].airlineCode}{APIresponse[0].flightNumber}</p>
-                        <p>Departure Date: {APIresponse[0].departureDate}</p>
-                        <p>{APIresponse[0].airline}</p>
-                        {/* <ul>
-                            {APIresponse[0].segments.map((flight, index) => (
-                            <li key={index}>{flight}</li>
-                            ))}
-                        </ul> */}
+                        <Flight flight={APIresponse}/>
                 </div>
             )}
             {APIresponse.length === 0 && (<p>No results recieved yet.</p>)}
