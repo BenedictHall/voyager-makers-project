@@ -4,14 +4,14 @@ import { HomePage } from "./pages/Home/HomePage";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip";
-import { ShowAllTrips } from "./pages/Trips/tripsPage"
+import { ShowAllTrips } from "./pages/Trips/tripsPage";
+import { Notifications } from "./pages/Notifications/Notifications.jsx";
 import { CreateItineraryPage } from "./pages/Itinerary/CreateItineraryPage";
 
 import { Navbar } from './components/Navbar/navbar.jsx';
 import { SingleTripPage } from "./pages/Trips/singleTripPage.jsx";
 import { FlightTracker } from "./pages/Flights/FlightTracker.jsx";
 import { DashboardPage } from "./pages/Dashboard/DashboardPage.jsx";
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const AuthLayout = () => (
@@ -37,6 +37,7 @@ const App = () => {
           <Route index element={<ShowAllTrips />} />
         </Route>
         <Route path="/dashboard" element={<DashboardPage/>}/>
+        <Route path="/notifications" element={<Notifications />}/>
       </Route>
     </Routes>
   );
