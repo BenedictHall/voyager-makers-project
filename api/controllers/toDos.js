@@ -14,7 +14,7 @@ const createToDo = async (req, res) => {
     const description = req.body.description;
     const dueDate = req.body.dueDate;
     const isCompleted = req.body.isCompleted;
-    const userId = req.user_id;
+    const userId = req.body.userId;
     const tripId = req.body.tripId;
 
     try {
