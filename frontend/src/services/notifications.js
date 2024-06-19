@@ -11,7 +11,7 @@ export const getAllNotifications = async (token, userId) => {
     const response = await fetch(`${BACKEND_URL}/notifications/${userId}`, requestOptions);
 
     if (response.status !== 200) {
-        throw new Error("Unable to fetch trips");
+        throw new Error("Unable to fetch notifications");
     }
     
     const data = await response.json();
@@ -29,7 +29,7 @@ export const getUnreadNotifications = async (token, userId) => {
     const response = await fetch(`${BACKEND_URL}/notifications/${userId}/unread`, requestOptions);
 
     if (response.status !== 200) {
-        throw new Error("Unable to fetch trips");
+        throw new Error("Unable to fetch notifications");
     }
     
     const data = await response.json();
@@ -47,7 +47,7 @@ export const markNotificationsAsRead = async (token, userId) => {
     const response = await fetch(`${BACKEND_URL}/notifications/${userId}/read`, requestOptions);
 
     if (response.status !== 200) {
-        throw new Error("Unable to fetch trips");
+        throw new Error("Unable to fetch notifications");
     }
     
     const data = await response.json();
