@@ -26,11 +26,16 @@ export const ToDo = (props) => {
         window.location.reload();
     };
 
+    const formatDate = (date) => {
+        const dateObj = new Date(date);
+        return dateObj.toLocaleDateString();
+    };
+
     return (
         <div>
             <h2>{props.toDo.title}</h2>
             <p>{props.toDo.description}</p>
-            <p>{props.toDo.dueDate}</p>
+            <p>Due by: {formatDate(props.toDo.dueDate)}</p>
             <button onClick={handleToggleComplete}>{isCompleted ? "Mark Incomplete" : "Mark Complete"}</button>
             <button onClick={handleDeleteToDo}>Delete</button>
         </div>
