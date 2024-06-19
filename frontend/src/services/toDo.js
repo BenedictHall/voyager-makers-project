@@ -58,6 +58,7 @@ export const toggleCompleteToDo = async (token, toDoId) => {
     const payload = {
         toDoId: toDoId,
     };
+    
 
     const requestOptions = {
         method: "PUT",
@@ -66,6 +67,7 @@ export const toggleCompleteToDo = async (token, toDoId) => {
             Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
+
     };
 
     const response = await fetch(`${BACKEND_URL}/toDos`, requestOptions);

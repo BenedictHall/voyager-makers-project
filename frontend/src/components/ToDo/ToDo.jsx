@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { toggleCompleteToDo, deleteToDo } from "../../services/todo";
+import { toggleCompleteToDo, deleteToDo } from "../../services/toDo";
 
 export const ToDo = (props) => {
     const token = props.token;
