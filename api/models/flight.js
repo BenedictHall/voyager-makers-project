@@ -1,11 +1,19 @@
 const mongoose = require("mongoose");
 
+const SegmentSchema = new mongoose.Schema({
+    departureAirport: String,
+    arrivalAirport: String,
+    flightDuration: String,
+    carrier: String,
+    segmentFlightNumber: Number
+});
+
 const FlightSchema = new mongoose.Schema({
-    // userId: {type: mongoose.Schema.Types.ObjectId, ref:'User', required: true},
-    carrierCode: {type: String, required: true}, 
-    flightNumber: {type: String, required: true}, 
-    departureDate: {type: String, required: true}, 
-})
+    airline: String,
+    airlineCode: String,
+    flightNumber: Number,
+    segments: [SegmentSchema] 
+});
 
 const Flight = mongoose.model("Flight", FlightSchema);
 

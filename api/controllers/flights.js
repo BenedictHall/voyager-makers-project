@@ -3,6 +3,7 @@ const dateFormatting = require("../utils/dateFormatting.js");
 const IATAtoCity = require("../data/IATAtoCity.js");
 const Flight = require ("../models/flight.js");
 const { generateToken } = require("../lib/token.js");
+const fetch = require('node-fetch');
 
 const getAirlineFromAPI = async (req, res) => {
     const airlineCodes = req.params.airlineCodes;
@@ -15,10 +16,11 @@ const getAirlineFromAPI = async (req, res) => {
 }
 
 const getFlightFromAPI = async (req,res) => {
-    const {carrierCode, flightNumber, scheduledDepartureDate} = req.params;
-
+    console.log("req.params.departureDate", req.params.departureDate)
+    const {carrierCode, flightNumber, departureDate} = req.params;
+    console.log("at backend. trying to get flight", carrierCode, flightNumber, departureDate)
     try {
-        const data = await flightAPIService.getFlightData(carrierCode, flightNumber, scheduledDepartureDate);
+        const data = await flightAPIService.getFlightData(carrierCode, flightNumber, departureDate);
         const numberOfFlights = data.data.length;
         const flightData = [];
         for (let i=0; i<numberOfFlights; i++) {
@@ -58,8 +60,8 @@ const getFlightFromAPI = async (req,res) => {
                 "flightNumber" : flightNumberResponse,
                 "segments" : segments});
         }
-
         res.status(200).json(flightData)
+        console.log("filtered flight data", flightData)
     } catch (error) {
         res.status(500).json({message: 'error fetching flight data', error});
     }
@@ -71,11 +73,12 @@ const getAllTrackedFlights  = async (req, res) => {
     res.status(200).json({ flights: flights, token: token });
 };
 
-const create = (req, res) => {
+const create = async (req, res) => {
     const carrierCode = req.body.carrierCode;
     const flightNumber = req.body.flightNumber;
     const departureDate = req.body.departureDate;
     console.log("Now trying to save", carrierCode, flightNumber, departureDate)
+    
     const flight = new Flight({ carrierCode, flightNumber, departureDate });
     flight
         .save()
@@ -84,9 +87,9 @@ const create = (req, res) => {
             res.status(201).json({ message: "OK"});
         })
         .catch((err) => {
-            // console.error(err);
+            console.error(err);
         
-            res.status(400).json({message: "Something went wrong with flight controller"});
+            res.status(400).json({message: "Something went wrong with flight controller: create"});
         });
 };
 

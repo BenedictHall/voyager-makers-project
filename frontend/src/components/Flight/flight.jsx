@@ -1,5 +1,5 @@
 export const Flight = ({ flight, token }) => {
-    const { _id, carrierCode, flightNumber, departureDate } = flight;
+    const { carrierCode, flightNumber, departureDate } = flight;
 
     return (
         <div>

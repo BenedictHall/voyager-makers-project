@@ -1,6 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export const trackNewFlight = async (token, carrierCode, flightNumber, departureDate) => {
+export const saveFlight = async (token, carrierCode, flightNumber, departureDate) => {
     const payload = {
         token: token,
         carrierCode: carrierCode,
@@ -40,4 +40,17 @@ export const getTrackedFlights = async(token) => {
     }
     const data = await response.json();
     return data;
+}
+
+export const getFlightFromAPI = async (carrierCode, flightNumber, departureDate) => {
+    console.log("getting flight", carrierCode, flightNumber, departureDate, "from backend")
+    let response = await fetch(`${BACKEND_URL}/flights/${carrierCode}-${flightNumber}-${departureDate}`);
+    if (response.status !== 200) {
+        throw new Error("Unable to get this flight data from external API at services");
+    } else {
+        console.log("Flight details recieved")
+        let trackGetFlightFromAPI = await response.json();
+        console.log("logging response from backend",trackGetFlightFromAPI)
+        return trackGetFlightFromAPI;
+    }
 }

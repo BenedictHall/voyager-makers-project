@@ -6,6 +6,6 @@ router.get("/", FlightsController.getAllTrackedFlights);
 
 router.post("/saveNewFlight", FlightsController.create);
 
-router.get("/:carrierCode-:flightNumber-:scheduledDepartureDate", FlightsController.getFlightFromAPI);
+router.get("/:carrierCode-:flightNumber-:departureDate", FlightsController.getFlightFromAPI);
 
 module.exports = router;
