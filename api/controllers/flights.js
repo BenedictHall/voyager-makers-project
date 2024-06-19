@@ -74,12 +74,16 @@ const getAllTrackedFlights  = async (req, res) => {
 };
 
 const create = async (req, res) => {
-    const carrierCode = req.body.carrierCode;
+    const airline = req.body.airline;
+    const airlineCode = req.body.airlineCode;
     const flightNumber = req.body.flightNumber;
-    const departureDate = req.body.departureDate;
-    console.log("Now trying to save", carrierCode, flightNumber, departureDate)
+    const flightDuration = req.body.flightDuration;
+    const departureAirport = req.body.departureAirport;
+    const arrivalAirport = req.body.arrivalAirport;
+    const token = req.body.token;
+    console.log("Now trying to save", airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport)
     
-    const flight = new Flight({ carrierCode, flightNumber, departureDate });
+    const flight = new Flight({ token, airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport });
     flight
         .save()
         .then((flight) => {

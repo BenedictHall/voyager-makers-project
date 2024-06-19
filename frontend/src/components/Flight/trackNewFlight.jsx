@@ -25,14 +25,26 @@ export const TrackNewFlight = () => {
             console.log(err);
             throw new Error("Could not get flight data from external API");
         }
-        // const token = localStorage.getItem("token");
-        // try {
-        //     await saveFlight(token, carrierCode, flightNumber, departureDate);
-        //     navigate ("/flights");
-        // } catch (err) {
-        // console.error(err);
-        // // add a redirect here
-        // }
+    };
+
+    const handleSave = async (event) => {
+        event.preventDefault();
+        // const {carrierCode, flightNumber, departureDate} = formData;
+        const token = localStorage.getItem("token");
+        const airline = APIresponse[0].airline;
+        const airlineCode = APIresponse[0].airlineCode;
+        const flightNumber = APIresponse[0].flightNumber;
+        const flightDuration = APIresponse[0].segments[0].flightDuration;
+        const departureAirport = APIresponse[0].segments[0].departureAirport;
+        const arrivalAirport = APIresponse[0].segments[0].arrivalAirport;
+        // const segments = APIresponse[0].segments;
+        try {
+            await saveFlight(token, airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport);
+            navigate ("/flights");
+        } catch (err) {
+        console.error(err);
+        // add a redirect here
+        }
     };
 
     const handleChange = (event) => {
@@ -79,6 +91,7 @@ export const TrackNewFlight = () => {
                 <div>
                     <h3>Flight information</h3>
                         <Flight flight={APIresponse}/>
+                        <button role="save-button" id="save" type="save" value="Save" onClick={handleSave}> Save </button>
                 </div>
             )}
             {APIresponse.length === 0 && (<p>No results recieved yet.</p>)}
