@@ -6,7 +6,8 @@ const FlightSchema = new mongoose.Schema({
     flightNumber: Number,
     flightDuration: String,
     departureAirport: String,
-    arrivalAirport: String
+    arrivalAirport: String,
+    departureDate: String
 });
 
 const Flight = mongoose.model("Flight", FlightSchema);

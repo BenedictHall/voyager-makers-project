@@ -1,6 +1,6 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export const saveFlight = async (token, airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport) => {
+export const saveFlight = async (token, airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport, departureDate) => {
     const payload = {
         token: token,
         airline: airline,
@@ -8,7 +8,8 @@ export const saveFlight = async (token, airline, airlineCode, flightNumber, flig
         flightNumber: flightNumber,
         arrivalAirport: arrivalAirport,
         flightDuration: flightDuration,
-        departureAirport: departureAirport
+        departureAirport: departureAirport,
+        departureDate: departureDate
     }
     const requestOptions = {
         method: 'POST',

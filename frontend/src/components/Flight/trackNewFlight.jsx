@@ -37,9 +37,10 @@ export const TrackNewFlight = () => {
         const flightDuration = APIresponse[0].segments[0].flightDuration;
         const departureAirport = APIresponse[0].segments[0].departureAirport;
         const arrivalAirport = APIresponse[0].segments[0].arrivalAirport;
+        const departureDate = formData.departureDate;
         // const segments = APIresponse[0].segments;
         try {
-            await saveFlight(token, airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport);
+            await saveFlight(token, airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport, departureDate);
             navigate ("/flights");
         } catch (err) {
         console.error(err);

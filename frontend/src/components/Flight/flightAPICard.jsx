@@ -2,10 +2,6 @@ import React from 'react';
 
 export const FlightAPICard = (props) => {
     
-    // const { carrierCode, flightNumber, departureDate } = flight;
-    // console.log("props.flight", props.flight[0])
-    // console.log("airline", props.flight[0].carrierCode)
-
     return (
         <div>
         <p>Airline: {props.flight[0].airline}</p>

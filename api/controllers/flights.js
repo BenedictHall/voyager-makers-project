@@ -79,10 +79,11 @@ const create = async (req, res) => {
     const flightDuration = req.body.flightDuration;
     const departureAirport = req.body.departureAirport;
     const arrivalAirport = req.body.arrivalAirport;
+    const departureDate = req.body.departureDate;
     const token = req.body.token;
-    console.log("Now trying to save", airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport)
+    console.log("Now trying to save", airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport, departureDate)
     
-    const flight = new Flight({ token, airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport });
+    const flight = new Flight({ token, airline, airlineCode, flightNumber, flightDuration, departureAirport, arrivalAirport, departureDate });
     flight
         .save()
         .then((flight) => {
