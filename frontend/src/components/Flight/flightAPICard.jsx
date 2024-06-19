@@ -5,15 +5,11 @@ export const FlightAPICard = (props) => {
     return (
         <div className = "card">
         <p>Airline: {props.flight[0].airline}</p>
-        <p>Airline Code: {props.flight[0].airlineCode}</p>
-        <p>Flight Number: {props.flight[0].flightNumber}</p>
+        <p>Flight {props.flight[0].airlineCode}{props.flight[0].flightNumber}</p>
         {props.flight[0].segments.map((segment) => (
             <div>
-            <p>{segment.arrivalAirport}</p>
-            <p>{segment.carrier}</p>
-            <p>{segment.departureAirport}</p>
-            <p>{segment.flightDuration}</p>
-            <p>{segment.flightNumber}</p>
+            <p>{segment.departureAirport} to {segment.arrivalAirport} </p>
+            <p>Duration {segment.flightDuration}</p>
             </div>
         ))}
     </div>

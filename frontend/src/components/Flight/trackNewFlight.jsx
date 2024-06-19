@@ -12,9 +12,11 @@ export const TrackNewFlight = () => {
     const [APIresponse, setAPIResponse] = useState([]);
     console.log("api response usestate",APIresponse);
     const navigate = useNavigate();
+    const [myError, setMyError] = useState("");
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setMyError("")
         const {carrierCode, flightNumber, departureDate} = formData;
         try {
             const response = await getFlightFromAPI(carrierCode, flightNumber, departureDate)
@@ -23,6 +25,7 @@ export const TrackNewFlight = () => {
             
         } catch (err) {
             console.log(err);
+            setMyError(err);
             throw new Error("Could not get flight data from external API");
         }
     };
@@ -88,6 +91,9 @@ export const TrackNewFlight = () => {
                 <input role="submit-button" id="submit" type="submit" value="Submit" />
         </form>
             <div>
+            {myError !== "" && (
+                <p>Could not get data from external API</p>
+            )}
             {APIresponse.length !== 0 && (
                 <div>
                     <h3>Flight information</h3>
