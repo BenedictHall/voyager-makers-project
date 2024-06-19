@@ -47,6 +47,25 @@ const AddExpenseForm = (props)=> {
     return (
         <>
         <form onSubmit={handleSubmit}>
+        <label htmlFor="category">Category:</label>
+                <select
+                    id="category"
+                    name ="category"
+                    value={formData.category}
+                    onChange={handleChange}
+                >
+                    <option value="">Select a category</option>
+                    <option value="Food and Drink">Food and Drink</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Accommodation">Accommodation</option>
+                    <option value="Car Rental/Expenses">Car Rental/Expenses</option>
+                    <option value="Entertainment">Entertainment</option>
+                    <option value="Shopping">Shopping</option>
+                    <option value="Health and Safety">Health and Safety</option>
+                    <option value="Communication">Communication</option>
+                    <option value="Miscellaneous">Miscellaneous</option>
+                </select>
+            <br/>
         <label htmlFor="description">Description:</label>
                 <input
                     id="description"
@@ -54,6 +73,7 @@ const AddExpenseForm = (props)=> {
                     value={formData.description}
                     onChange={handleChange}
                 />
+            <br/>
             <label htmlFor="amount">Amount:</label>
                 <input
                     id="amount"
@@ -72,22 +92,6 @@ const AddExpenseForm = (props)=> {
                     dateFormat="dd/MM/yyyy"
                 />
             </div>
-            <br/>
-            <label htmlFor="category">Category:</label>
-                <select
-                    id="category"
-                    name ="category"
-                    value={formData.category}
-                    onChange={handleChange}
-                >
-                    <option value="">Select a category</option>
-                    <option value="Food and Drink">Food and Drink</option>
-                    <option value="Transport">Transport</option>
-                    <option value="Accommodation">Accommodation</option>
-                    <option value="Parking Fee">Parking fees</option>
-                    <option value="Car Expense">Car Expenses</option>
-                    <option value="Other">Other</option>
-                </select>
             <br/>
             <input role="submit-button" id="submit" type="submit" value="Submit" />
 

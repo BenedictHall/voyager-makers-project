@@ -1,6 +1,6 @@
 import AddBudgetForm from "../../components/Budget/BudgetForm"
 import BudgetItem from "../../components/Budget/BudgetItem"
-import { deleteBudget, getBudgets } from "../../services/budget"
+import { getBudgets } from "../../services/budget"
 import { useState , useEffect} from "react"
 import { useParams } from "react-router-dom";
 
@@ -16,7 +16,7 @@ export const BudgetPage = () => {
 
             getBudgets(token)
                 .then((data) => {
-                    console.log('this is data', data)
+                    // console.log('this is data', data)
                     setBudgets(data.budgets.filter((budget) => {return budget.tripId == tripId}));
                     localStorage.setItem("token", data.token);
                 })
