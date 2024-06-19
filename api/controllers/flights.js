@@ -67,7 +67,7 @@ const getFlightFromAPI = async (req,res) => {
 };
 
 const getAllTrackedFlights  = async (req, res) => {
-    const flights = await Flight.find();
+    const flights = await Flight.find().sort({departureDate:1});
     const token = generateToken(req.user_id);
     res.status(200).json({ flights: flights, token: token });
 };
