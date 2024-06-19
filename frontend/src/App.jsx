@@ -12,6 +12,8 @@ import { SingleTripPage } from "./pages/Trips/singleTripPage.jsx";
 import { FlightTracker } from "./pages/Flights/FlightTracker.jsx";
 import { DashboardPage } from "./pages/Dashboard/DashboardPage.jsx";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const AuthLayout = () => (
   <>
     <Navbar/>
