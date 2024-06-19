@@ -1,7 +1,7 @@
 import createFetchMock from "vitest-fetch-mock";
 import { describe, vi } from "vitest";
 
-import { getAllToDos, createToDo, deleteToDo, toggleCompleteToDo } from "../../src/services/toDo";
+import { getAllToDos, createToDo, deleteToDo, toggleCompleteToDo } from "../../src/services/todo";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 

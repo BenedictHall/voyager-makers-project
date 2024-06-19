@@ -8,6 +8,7 @@ const tripsRouter = require("./routes/trips")
 const tokenChecker = require("./middleware/tokenChecker");
 const toDoRouter = require("./routes/toDo");
 const notificationRouter = require("./routes/notification.js");
+const itinerariesRouter = require("./routes/itineraries");
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use("/tokens", authenticationRouter);
 app.use("/trips", tripsRouter);
 app.use("/toDos", tokenChecker, toDoRouter);
 app.use("/notifications", notificationRouter);
+app.use("/itineraries", tokenChecker, itinerariesRouter);
 
 // 404 Handler
 app.use((_req, res) => {
