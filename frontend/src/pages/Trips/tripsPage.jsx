@@ -1,6 +1,6 @@
 import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
-import { Trip } from "../../components/Trip/trip";
+import { Trip } from "../../components/Trip/Trip";
 import { getTrips } from "../../services/trips"
 
 
