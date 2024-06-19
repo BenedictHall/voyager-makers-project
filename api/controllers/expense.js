@@ -29,7 +29,7 @@ const addExpense = async (req, res) => {
         await expense.save()
         res.status(201).json({message: 'Expense Added'})
     } catch (error) {
-        res.status(500).json({message: 'Server Error'})
+        res.status(400).json({message: 'Server Error'})
     }
 
     // console.log(expense)
@@ -41,7 +41,7 @@ const getExpenses = async (req, res) =>{
         const token = generateToken(req.user_id);
         res.status(200).json({expenses:expenses, token:token})
     } catch (error) {
-        res.status(500).json({message: 'Server Error'})
+        res.status(400).json({message: 'Server Error'})
     }
 }
 

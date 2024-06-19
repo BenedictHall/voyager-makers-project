@@ -17,7 +17,6 @@ export const ExpensePage = () => {
 
             getExpenses(token)
                 .then((data) => {
-                    console.log('this is data', data)
                     setExpenses(data.expenses.filter((expense) => {return expense.budgetId == budgetId}));
                     localStorage.setItem("token", data.token);
                 })
