@@ -7,13 +7,12 @@ export const FlightDBCard = (props) => {
 
     return (
         <div className="card">
+        <h3>{props.flight.departureAirport} to {props.flight.arrivalAirport}</h3>
+        <p>{props.flight.departureDate}</p>
         <p>Airline: {props.flight.airline}</p>
-        <p>Airline Code: {props.flight.airlineCode}</p>
-        <p>Arrival Airport: {props.flight.arrivalAirport}</p>
-        <p>Departure Airport: {props.flight.departureAirport}</p>
-        <p>Flight Duration: {props.flight.flightDuration}</p>
-        <p>Flight Number: {props.flight.flightNumber}</p>
-        <p>Departure Date: {props.flight.departureDate}</p>
+        <p>Flight Number: {props.flight.airlineCode}{props.flight.flightNumber}</p>
+        <p>Duration: {props.flight.flightDuration}</p>
+        
     </div>
     )
 

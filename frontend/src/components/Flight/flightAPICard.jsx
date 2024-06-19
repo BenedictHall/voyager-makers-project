@@ -3,7 +3,7 @@ import React from 'react';
 export const FlightAPICard = (props) => {
     
     return (
-        <div>
+        <div className = "card">
         <p>Airline: {props.flight[0].airline}</p>
         <p>Airline Code: {props.flight[0].airlineCode}</p>
         <p>Flight Number: {props.flight[0].flightNumber}</p>
