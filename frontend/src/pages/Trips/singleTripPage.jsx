@@ -18,6 +18,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Image from 'react-bootstrap/Image';
 
 
 
@@ -138,6 +139,16 @@ export function SingleTripPage () {
 
     return(
         <>
+            <div style={{ overflow: 'hidden', height: '300px', width: '100%', position: 'relative' }}>
+            <Image src="../../../../public/david-vives-ELf8M_YWRTY-unsplash.jpg" fluid style={{
+                    width: '100%',
+                    height: 'auto',
+                    position: 'absolute',
+                    top: '10%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)'
+                }}/>;
+            </div>
             <div data-testid="singleTripHeader"><SingleTripItem data={tripInformation} /></div>
             <Container>
             <Row>
