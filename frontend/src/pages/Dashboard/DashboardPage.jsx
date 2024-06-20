@@ -4,6 +4,7 @@ import { getAllToDos } from "../../services/toDo";
 import { ToDo } from "../../components/ToDo/ToDo";
 import { Trip } from "../../components/Trip/Trip";
 import { getTrips } from "../../services/trips";
+import Card from 'react-bootstrap/Card';
 
 
 export const DashboardPage = () => {
@@ -48,11 +49,11 @@ export const DashboardPage = () => {
 
     return (
         <>
-            <h2>Dashboard</h2>
-            <p>Welcome to the dashboard</p>
+            <h1>At a glance</h1>
             <h2>Upcoming Trips:</h2>
             <div>
                 {trips.map((trip) => (
+                    
                     <Trip key={trip._id} trip={trip} token={token} />
                 ))}
             </div>
