@@ -40,6 +40,8 @@ export function SingleTripPage () {
     }
 
     useEffect(() => {
+
+
         if (token) {
             getAllItineraries(token)
                 .then((data) => {
@@ -55,6 +57,8 @@ export function SingleTripPage () {
     }, []);
 
     useEffect(() => {
+
+
         if (token) {
             getAllToDos(token)
                 .then((data) => {

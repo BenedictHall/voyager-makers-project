@@ -53,8 +53,11 @@ export const Navbar = () => {
                     <NavLink to = {"/trips"} className="link">Trips</NavLink>
                     <Link to = {"/todo"} className="link">To Do</Link>
                     <Link to = {"/budget"} className="link">Budget</Link>
+                    <Link to = {"/flights"} className="link">Flights</Link>
+
                     <Link to = {"/notifications"} className="link">Notifications {notificationsCount ? `(${notificationsCount})` : ""}</Link>
                     <div className="menu">
+                        <span></span>
                         <span></span>
                         <span></span>
                         <span></span>

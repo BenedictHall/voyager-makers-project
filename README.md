@@ -3,6 +3,9 @@
 One of the dependencies will be the flight API
 https://developers.amadeus.com/get-started/get-started-with-self-service-apis-335
 
+Get your authorization token and add a line to api/.env called FLIGHT_API_KEY={your_token_here}. This expires every 20 minutes or so but you can get a new one.
+
+
 Documentation
 [ ] There is up-to-date documentation:
 [ ] a project description.

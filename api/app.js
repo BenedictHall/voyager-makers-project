@@ -7,8 +7,11 @@ const authenticationRouter = require("./routes/authentication");
 const tripsRouter = require("./routes/trips")
 const tokenChecker = require("./middleware/tokenChecker");
 const toDoRouter = require("./routes/toDo");
-const notificationRouter = require("./routes/notification.js");
+
+const flightRouter = require("./routes/flights")
 const itinerariesRouter = require("./routes/itineraries");
+const notificationRouter = require("./routes/notification.js");
+
 const budgetRouter = require("./routes/budget");
 const expenseRouter = require("./routes/expense")
 
@@ -27,8 +30,12 @@ app.use("/users", usersRouter);
 app.use("/tokens", authenticationRouter);
 app.use("/trips", tripsRouter);
 app.use("/toDos", tokenChecker, toDoRouter);
-app.use("/notifications", notificationRouter);
+
 app.use("/itineraries", tokenChecker, itinerariesRouter);
+app.use("/notifications", notificationRouter);
+app.use("/flights", flightRouter);
+
+
 app.use("/budget",  tokenChecker, budgetRouter);
 app.use("/expense", tokenChecker, expenseRouter)
 
@@ -43,7 +50,7 @@ app.use((err, _req, res, _next) => {
   if (process.env.NODE_ENV === "development") {
     res.status(500).send(err.message);
   } else {
-    res.status(500).json({ err: "Something went wrong" });
+    res.status(500).json({ err: "Something went wrong with app" });
   }
 });
 
