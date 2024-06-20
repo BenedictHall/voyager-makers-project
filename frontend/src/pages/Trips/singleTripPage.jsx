@@ -8,6 +8,14 @@ import { CreateToDo } from "../../components/ToDo/CreateToDo";
 import { getAllToDos } from "../../services/todo";
 import { ToDo } from "../../components/ToDo/ToDo";
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+import ListGroup from 'react-bootstrap/ListGroup';
+
+
 
 export function SingleTripPage () {
     const [ tripInformation, setTripInformation ] = useState(null);
@@ -94,19 +102,38 @@ export function SingleTripPage () {
     return(
         <>
             <div data-testid="singleTripHeader"><SingleTripItem data={tripInformation} /></div>
-            
+            <Container>
+            <Row>
+            <Col xs={6}>
+            <Card style={{ width: '32rem'}}>
+            <Card.Body>
             <div>
                 <button onClick={() => navigate(`/trips/${tripId}/budget`)}>Budget</button>
             </div>
+            </Card.Body>
+            </Card>
+            </Col>
+            <Col xs={6}>
+            <Card style={{ width: '32rem' }}>
+                <Card.Body>
             <div>
-                <h3>Trip ToDo List:</h3>
-                <CreateToDo token={token} tripId={tripId} onToDoCreated={handleToDoCreated}/>
-                <div>
+                <h3>To do</h3>
+                
+                <ListGroup>
                     {toDos.filter((toDo) => {return toDo.tripId == tripId}).map((toDo) => (
-                        <ToDo key={toDo._id} toDo={toDo} token={token} />   
+                        <ListGroup.Item>
+                            <ToDo key={toDo._id} toDo={toDo} token={token} /> 
+                        </ListGroup.Item>  
                     ))}
-                </div>
+                </ListGroup>
+                <CreateToDo token={token} tripId={tripId} onToDoCreated={handleToDoCreated}/>
             </div>
+            </Card.Body>
+            </Card >
+            </Col>
+            </Row>
+            <Card style={{ width:'32rem' }}>
+                <Card.Body>
             <div>
                 <h3>Trip Itinerary:</h3>
                 <button onClick={() => navigate(`/trips/${tripId}/createitinerary`)}>Add to Itinerary</button>
@@ -121,6 +148,9 @@ export function SingleTripPage () {
                     ))}
                 </div>
             </div>
+            </Card.Body>
+            </Card>
+            </Container>
         </>
     )
 }

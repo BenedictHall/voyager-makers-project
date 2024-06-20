@@ -1,5 +1,9 @@
 import { useState } from "react";
 import { toggleCompleteToDo, deleteToDo } from "../../services/toDo";
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 export const ToDo = (props) => {
     const token = props.token;
@@ -32,12 +36,25 @@ export const ToDo = (props) => {
     };
 
     return (
-        <div>
-            <h2>{props.toDo.title}</h2>
-            <p>{props.toDo.description}</p>
-            <p>Due by: {formatDate(props.toDo.dueDate)}</p>
-            <button onClick={handleToggleComplete}>{isCompleted ? "Mark Incomplete" : "Mark Complete"}</button>
-            <button onClick={handleDeleteToDo}>Delete</button>
-        </div>
+            <Container>
+                <Row>
+                    <Col>
+                        <h5>{props.toDo.title}</h5>
+                        <p>{props.toDo.description}</p>
+                    </Col>
+                    <Col>
+                        <p>{formatDate(props.toDo.dueDate)}</p>
+                        <Container><Row>
+                        <Col>
+                        <Button variant="secondary" onClick={handleToggleComplete}>{isCompleted ? "Mark Incomplete" : "Mark Complete"}</Button>
+                        </Col>
+                        <Col>
+                        <Button variant="secondary" onClick={handleDeleteToDo}>Delete</Button>
+                        </Col>
+                        </Row>
+                        </Container>
+                    </Col>
+                </Row>
+            </Container>
     );
 };
