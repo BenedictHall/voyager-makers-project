@@ -52,6 +52,7 @@ export const BudgetPage = () => {
                 <p>No budgets to display.</p>
                 )} 
             </div>
+            <a href={`/trips/${tripId}`}><button>Back to Trip</button></a>
         </div>
     );
 };

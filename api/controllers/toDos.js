@@ -83,7 +83,6 @@ const deleteToDo = async (req, res) => {
 // implement task notification logic
 const checkTodo = async () => {
     const toDos = await ToDo.find({ isCompleted: false, isNotified: false });
-    console.log("!!!!!!TODOS", toDos);
     const notifications = [];
     const updatedTodos = [];
 
@@ -102,7 +101,7 @@ const checkTodo = async () => {
             updatedTodos.push(toDo.id);
         }
     });
-    console.log("!!!!!!NOTIFICATIONS", notifications);
+    
 
     if (notifications.length) {
         await Promise.all([
