@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllToDos } from "../../services/todo";
+import { getAllToDos } from "../../services/toDo";
 import { ToDo } from "../../components/ToDo/ToDo";
 
 

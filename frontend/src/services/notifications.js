@@ -44,12 +44,12 @@ export const markNotificationsAsRead = async (token, userId) => {
         },
     };
 
-    const response = await fetch(`${BACKEND_URL}/notifications/${userId}/read`, requestOptions);
+    await fetch(`${BACKEND_URL}/notifications/${userId}/read`, requestOptions);
 
-    if (response.status !== 200) {
-        throw new Error("Unable to fetch notifications");
-    }
+//     if (response.status !== 200) {
+//         throw new Error("Unable to fetch notifications");
+//     }
     
-    const data = await response.json();
-    return data;
+//     const data = await response.json();
+//     return data;
 };

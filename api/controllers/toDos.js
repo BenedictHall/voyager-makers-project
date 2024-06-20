@@ -14,7 +14,7 @@ const createToDo = async (req, res) => {
     const description = req.body.description;
     const dueDate = req.body.dueDate;
     const isCompleted = req.body.isCompleted;
-    const userId = req.user_id;
+    const userId = req.body.userId;
     const tripId = req.body.tripId;
 
     try {
@@ -47,10 +47,12 @@ const toggleCompleteToDo = async (req, res) => {
         }
         if (toDo.isCompleted) {
             toDo.isCompleted = false;
+            toDo.isNotified = false;
             await toDo.save();
             res.status(200).json({ message: "ToDo Incomplete", token: newToken, toDo: toDo });
         } else {
             toDo.isCompleted = true;
+            toDo.isNotified = true;
             await toDo.save();
             res.status(200).json({ message: "ToDo Completed", token: newToken, toDo: toDo });
         }
@@ -81,7 +83,7 @@ const deleteToDo = async (req, res) => {
 // implement task notification logic
 const checkTodo = async () => {
     const toDos = await ToDo.find({ isCompleted: false, isNotified: false });
-    
+    console.log("!!!!!!TODOS", toDos);
     const notifications = [];
     const updatedTodos = [];
 
@@ -100,6 +102,7 @@ const checkTodo = async () => {
             updatedTodos.push(toDo.id);
         }
     });
+    console.log("!!!!!!NOTIFICATIONS", notifications);
 
     if (notifications.length) {
         await Promise.all([
@@ -110,7 +113,7 @@ const checkTodo = async () => {
 };
 
 // Schedule the task checker to run every hour
-cron.schedule('0 * * * *', () => {
+cron.schedule('* * * * *', () => {
     checkTodo();
 });
 
