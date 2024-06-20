@@ -4,6 +4,7 @@ import { HomePage } from "./pages/Home/HomePage";
 import { LoginPage } from "./pages/Login/LoginPage";
 import { SignupPage } from "./pages/Signup/SignupPage";
 import { AddNewTrip } from "./pages/AddNewTrip/AddNewTrip";
+
 import { ShowAllTrips } from "./pages/Trips/tripsPage";
 import { Notifications } from "./pages/Notifications/Notifications.jsx";
 import { CreateItineraryPage } from "./pages/Itinerary/CreateItineraryPage";
@@ -15,6 +16,12 @@ import { DashboardPage } from "./pages/Dashboard/DashboardPage.jsx";
 import { BudgetPage } from "./pages/Budget/BudgetPage.jsx";
 import { ExpensePage } from "./pages/Expense/ExpensePage.jsx";
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
+
+// docs: https://reactrouter.com/en/main/start/overview
+
 
 const AuthLayout = () => (
   <>
@@ -39,6 +46,8 @@ const App = () => {
           <Route index element={<ShowAllTrips />} />
         </Route>
         <Route path="/dashboard" element={<DashboardPage/>}/>
+        <Route path="/notifications" element={<Notifications />}/>
+
       </Route>
     </Routes>
   );

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 
 export const Trip = (props) => {
     const navigate = useNavigate()
+
     
     const tripId = props.trip._id 
 

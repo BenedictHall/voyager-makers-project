@@ -40,7 +40,8 @@ export function SingleTripPage () {
     }
 
     useEffect(() => {
-        const navigate = useNavigate();
+
+
         if (token) {
             getAllItineraries(token)
                 .then((data) => {
@@ -56,7 +57,8 @@ export function SingleTripPage () {
     }, []);
 
     useEffect(() => {
-        const navigate = useNavigate();
+
+
         if (token) {
             getAllToDos(token)
                 .then((data) => {
