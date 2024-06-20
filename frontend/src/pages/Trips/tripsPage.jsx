@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { Trip } from "../../components/Trip/Trip";
 import { getTrips } from "../../services/trips"
 
@@ -33,6 +33,7 @@ export const ShowAllTrips = () => {
     return (
         <>
             <h2>show all my trips</h2>
+            <NavLink to = {"/trips/newtrip"} className="link">Create a New trip</NavLink>
             <div> 
                 {trips.map((trip)=>(
                     <Trip trip={trip} token={token} key={trip._id}/>

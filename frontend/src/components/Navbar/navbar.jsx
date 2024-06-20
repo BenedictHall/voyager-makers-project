@@ -5,7 +5,6 @@ import "../../../css/navbar.css";
 import { getUnreadNotifications } from "../../services/notifications";
 export const Navbar = () => {
     const navigate = useNavigate();
-    const [search, setSearch] = useState("");
     const [notificationsCount, setNotificationsCount] = useState(0);
     useEffect(() => {
         getNotificationCount();
@@ -16,12 +15,6 @@ export const Navbar = () => {
             localStorage.removeItem("userId");
             navigate("/login")
         };
-    const handleSearchChange = (event) => {
-        setSearch(event.target.value);
-    };
-    const handleSubmit = (event) =>{
-        event.preventDefault();
-    }
 
     const getNotificationCount = async () => {
         const token = localStorage.getItem("token");
@@ -42,17 +35,10 @@ export const Navbar = () => {
                     <p>Voyager</p>
                 </Link>
             </div>
-            <div className = "navbar-left">
-                <form onSubmit = {handleSubmit}>
-                <input className="searchbar" type="text" placeholder="Search.." value={search} onChange={handleSearchChange}></input>
-                </form>
-
-            </div>
+            
             <div className= "navbar-right">
                 
                     <NavLink to = {"/trips"} className="link">Trips</NavLink>
-                    <Link to = {"/todo"} className="link">To Do</Link>
-                    <Link to = {"/budget"} className="link">Budget</Link>
                     <Link to = {"/flights"} className="link">Flights</Link>
 
                     <Link to = {"/notifications"} className="link">Notifications {notificationsCount ? `(${notificationsCount})` : ""}</Link>
