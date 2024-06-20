@@ -31,6 +31,7 @@ export function SingleTripPage () {
         if(response){
             setTripInformation(response.singleTrip);
         }
+        console.log(tripInformation)
     }
 
     const token = localStorage.getItem("token");
@@ -92,8 +93,8 @@ export function SingleTripPage () {
 
     return(
         <>
-            <h3 data-testid="singleTripHeader">Your Trip</h3>
-            <SingleTripItem data={tripInformation} />
+            <div data-testid="singleTripHeader"><SingleTripItem data={tripInformation} /></div>
+            
             <div>
                 <button onClick={() => navigate(`/trips/${tripId}/budget`)}>Budget</button>
             </div>

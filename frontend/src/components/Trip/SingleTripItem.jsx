@@ -7,8 +7,8 @@ export default function SingleTripItem (props) {
     return(
         <div key={data._id}>
             <h2 data-testid="singleTripLocation">{data.location}</h2>
-            <p data-testid="singleTripStartDate">{data.startDate}</p> 
-            <p data-testid="singleTripEndDate">{data.endDate}</p>
+            <span style={{ display: 'inline-block' }}><div data-testid="singleTripStartDate">{data.startDate} - </div> 
+            <div data-testid="singleTripEndDate">{data.endDate}</div></span>
         </div>
     );
 }
