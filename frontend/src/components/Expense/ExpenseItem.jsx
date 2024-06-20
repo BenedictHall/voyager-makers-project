@@ -1,5 +1,9 @@
 import moment from 'moment'
 import { deleteExpense } from '../../services/expense'
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 const dateFormat = (date) =>{
     return moment(date).format('DD/MM/YYYY')
@@ -25,18 +29,29 @@ function ExpenseItem (props) {
 
     return(
         <>
-                <div className="inner-content">
-                    <div className="text">
-                        <p>{category}</p>
-                        <p>{description}</p>
-                        <p>£{amount}</p>
-                        <p>{dateFormat(date)}</p>
-                        <div>
-                        <button onClick={handleDeleteExpense}>Delete</button>
-                        </div>
+                <Container>
+                    <Row>
                         
-                    </div>
-                </div>
+                    {/* <div className="text"> */}
+                        <Col>
+                        <p>{category}</p>
+                        </Col>
+                        <Col>
+                        <p>{description}</p>
+                        </Col>
+                        <Col>
+                        <p>£{amount}</p>
+                        </Col>
+                        <Col>
+                        <p>{dateFormat(date)}</p>
+                        </Col>
+                        <Col>
+                        <Button onClick={handleDeleteExpense}>Delete</Button>
+                        </Col>
+                        
+                    {/* </div> */}
+                    </Row>
+                </Container>
         </>
     )
 }

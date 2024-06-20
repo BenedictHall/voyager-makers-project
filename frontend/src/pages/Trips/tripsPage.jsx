@@ -5,6 +5,8 @@ import { getTrips } from "../../services/trips"
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 
 
 export const ShowAllTrips = () => {
@@ -33,15 +35,30 @@ export const ShowAllTrips = () => {
         return;
     }
 
+    const newTripButton = () => {
+        navigate("trips/newtrip")
+    }
+
     return (
         <>
             <h2>My trips</h2>
-            <NavLink to = {"/trips/newtrip"} className="link">Create a New trip</NavLink>
                 <Container>
                     <Row>
+                        <Col>
+                        <Card id = "trip-card" style={{width: "18rem", height: "21rem"}} >
+                            <Card.Img id = "trip-card-image" variant="top" src="../../../../public/plus.png" style = {{width: "50px", margin: "0 auto", padding:"3rem"}}/>
+                            <Card.Body>
+                                <Card.Title>
+                                
+                                    <h4>Add new trip</h4>
+                                </Card.Title>
+                                <Button variant="primary" onClick={newTripButton}>Create</Button>
+                                </Card.Body>
+                        </Card>
+                        </Col>
                         {trips.map((trip) => (
                             <Col sm key={trip._id}>
-                                <Trip trip={trip} token={token} />
+                                <Trip style={{ width: '18rem' }} trip={trip} token={token} />
                             </Col>
                         ))}
                     </Row>
