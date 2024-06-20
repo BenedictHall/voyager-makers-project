@@ -44,7 +44,7 @@ function BudgetItem (props) {
                     <div className="text">
                         <p>Total: £{amount}</p>
                         <p>Remaining: £{remaining} </p>
-                        <a href={`/trips/${tripId}/budget/${budgetId}`}>View Expenses</a>
+                        <a href={`/trips/${tripId}/budget/${budgetId}`}><button>View Expenses</button></a>
                         <div>
                         <button onClick={handleDeleteBudget}>Delete</button>
                         </div>

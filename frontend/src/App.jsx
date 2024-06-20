@@ -47,7 +47,7 @@ const App = () => {
         </Route>
         <Route path="/dashboard" element={<DashboardPage/>}/>
         <Route path="/notifications" element={<Notifications />}/>
-
+        <Route path="/flights" element={<FlightTracker />}/>
       </Route>
     </Routes>
   );

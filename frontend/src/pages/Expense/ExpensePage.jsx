@@ -10,6 +10,7 @@ import { useParams } from "react-router-dom";
 export const ExpensePage = () => {
     const [expenses, setExpenses] = useState([]);
     let budgetId = useParams().budgetId;
+    let tripId = useParams().tripId;
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -61,6 +62,7 @@ export const ExpensePage = () => {
                 <p>No expenses to display.</p>
                 )} 
             </div>
+            <a href={`/trips/${tripId}/budget`}><button>Back to Budget</button></a>
         </div>
     );
 };
