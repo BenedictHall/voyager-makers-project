@@ -7,6 +7,7 @@ import { Itinerary } from "../../components/Itinerary/Itinerary";
 import { CreateToDo } from "../../components/ToDo/CreateToDo";
 import { getAllToDos } from "../../services/todo";
 import { ToDo } from "../../components/ToDo/ToDo";
+import { CreateItinerary } from "../../components/Itinerary/CreateItinerary.jsx";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -23,6 +24,8 @@ export function SingleTripPage () {
     const navigate = useNavigate();
     const [itineraries, setItineraries] = useState([]);
     const [toDos, setToDos] = useState([]);
+    const [addClicked, setAddClicked] = useState(false);
+    console.log("add clicked = ", addClicked)
 
     useEffect(()=>{
         const token = localStorage.getItem("token");
@@ -99,6 +102,10 @@ export function SingleTripPage () {
 
     const groupedItineraries = groupByDate(itineraries);
 
+    const handleAddClicked = () => {
+        setAddClicked(!addClicked);
+    }
+
     return(
         <>
             <div data-testid="singleTripHeader"><SingleTripItem data={tripInformation} /></div>
@@ -135,19 +142,34 @@ export function SingleTripPage () {
             <Card style={{ width:'32rem' }}>
                 <Card.Body>
             <div>
-                <h3>Trip Itinerary:</h3>
-                <button onClick={() => navigate(`/trips/${tripId}/createitinerary`)}>Add to Itinerary</button>
-                <div>
+                <h3>Trip Itinerary</h3>
+                
                     {Object.keys(groupedItineraries).map((date) => (
+                        <ListGroup>
                         <div key={date}>
-                            <h4>{date}</h4>
+                            <h6>{date}</h6>
+                            
                             {groupedItineraries[date].map((itinerary) => (
+                                <ListGroup.Item>
                                 <Itinerary key={itinerary._id} itinerary={itinerary} token={token} />
+                                </ListGroup.Item>
                             ))}
+                            
                         </div>
+                        </ListGroup>
                     ))}
+                    <Button onClick = {handleAddClicked}>Add</Button>
+                {addClicked ? (
+                    <div>
+                    <CreateItinerary token={token} tripId={tripId} />
+                    <a href={`/trips/${tripId}`}>Back to Trip</a>
+                    </div>
+
+                    ) : (<p></p>)}
                 </div>
-            </div>
+                
+                
+
             </Card.Body>
             </Card>
             </Container>

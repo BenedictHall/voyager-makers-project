@@ -12,6 +12,7 @@ export const ToDo = (props) => {
     const initialIsCompletedStatus = props.toDo.isCompleted;
     const [isCompleted, setIsCompleted] = useState(initialIsCompletedStatus);
 
+
     const handleToggleComplete = async () => {
         try {
             const data = await toggleCompleteToDo(token, toDoId);
