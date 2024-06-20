@@ -3,8 +3,14 @@ import { deleteBudget, calculateRemainingBudget } from '../../services/budget'
 import { useParams } from "react-router-dom";
 import { useState , useEffect} from "react"
 
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import ListGroup from 'react-bootstrap/ListGroup';
 
-function BudgetItem (props) {
+
+export function BudgetItem (props) {
     const token = props.token;
     const budgetId = props.budget._id;
     const amount = props.budget.amount;
@@ -39,18 +45,23 @@ function BudgetItem (props) {
     
     return(
         <>
-            <h5>{title}</h5>
-                <div className="inner-content">
-                    <div className="text">
-                        <p>Total: £{amount}</p>
-                        <p>Remaining: £{remaining} </p>
-                        <a href={`/trips/${tripId}/budget/${budgetId}`}><button>View Expenses</button></a>
-                        <div>
-                        <button onClick={handleDeleteBudget}>Delete</button>
-                        </div>
-                        
-                    </div>
-                </div>
+            <ListGroup.Item>
+            <Container>
+            <Row>
+                
+            <Col><h5>{title}</h5></Col>
+                
+            <Col><p>Total: £{amount}</p></Col>
+            <Col><p>Remaining: £{remaining} </p></Col>
+            <Col><a href={`/trips/${tripId}/budget/${budgetId}`}><Button variant="secondary">View</Button></a>
+            <Button variant="secondary" onClick={handleDeleteBudget}>Delete</Button>
+            </Col>
+
+
+                
+                </Row>
+                </Container>
+                </ListGroup.Item>
         </>
     )
 }

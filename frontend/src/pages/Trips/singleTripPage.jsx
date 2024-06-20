@@ -8,6 +8,9 @@ import { CreateToDo } from "../../components/ToDo/CreateToDo";
 import { getAllToDos } from "../../services/todo";
 import { ToDo } from "../../components/ToDo/ToDo";
 import { CreateItinerary } from "../../components/Itinerary/CreateItinerary.jsx";
+import {AddBudgetForm} from "../../components/Budget/BudgetForm.jsx"
+import {BudgetItem} from "../../components/Budget/BudgetItem.jsx"
+import { getBudgets } from "../../services/budget"
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -25,7 +28,9 @@ export function SingleTripPage () {
     const [itineraries, setItineraries] = useState([]);
     const [toDos, setToDos] = useState([]);
     const [addClicked, setAddClicked] = useState(false);
-    console.log("add clicked = ", addClicked)
+    const [budgets, setBudgets] = useState([]);
+    const [addBudgetClicked, setAddBudgetClicked] = useState(false);
+    console.log("budget clicked? ", addBudgetClicked);
 
     useEffect(()=>{
         const token = localStorage.getItem("token");
@@ -106,6 +111,31 @@ export function SingleTripPage () {
         setAddClicked(!addClicked);
     }
 
+    const handleAddBudgetClicked = () => {
+        setAddBudgetClicked(!addClicked)
+    }
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token) {
+
+            getBudgets(token)
+                .then((data) => {
+                    // console.log('this is data', data)
+                    setBudgets(data.budgets.filter((budget) => {return budget.tripId == tripId}));
+                    localStorage.setItem("token", data.token);
+                })
+                .catch((error) => {
+                    console.error("Failed to fetch budgets:", error);
+                });
+        }
+    }, []);
+
+    const handleBudgetCreated = (newBudget) => {
+        setBudgets((prevBudgets) => [newBudget, ...prevBudgets]);
+        window.location.reload();
+    };
+
     return(
         <>
             <div data-testid="singleTripHeader"><SingleTripItem data={tripInformation} /></div>
@@ -114,8 +144,22 @@ export function SingleTripPage () {
             <Col xs={6}>
             <Card style={{ width: '32rem'}}>
             <Card.Body>
-            <div>
-                <button onClick={() => navigate(`/trips/${tripId}/budget`)}>Budget</button>
+                <div className="InnerLayout">
+                <h3>Budgets</h3>
+                <div >
+                    <ListGroup>
+                    {budgets && budgets.length > 0 ? (
+                        budgets.map((budget)=>(
+                        <BudgetItem token={token} key={budget._id} budget={budget}/>
+                    ))
+                    
+                    ): (
+                    <p>No budgets to display.</p>
+                    )} 
+                    </ListGroup>
+                </div>
+                <Button onClick = {handleAddBudgetClicked}>Add budget</Button>
+                {addBudgetClicked ? (<AddBudgetForm tripId={tripId} onBudgetCreated={handleBudgetCreated}/>) : (<p></p>)}
             </div>
             </Card.Body>
             </Card>
