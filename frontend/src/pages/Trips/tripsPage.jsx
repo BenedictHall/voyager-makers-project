@@ -13,7 +13,8 @@ export const ShowAllTrips = () => {
         if(token) {
             getTrips(token)
             .then((data) => {
-                setTrips(data.trips);
+                const sortedTrips = data.trips.sort((a, b) => a.startDate.localeCompare(b.startDate));
+                setTrips(sortedTrips);
                 localStorage.setItem("token", data.token);
             })
             .catch((error)=>{
