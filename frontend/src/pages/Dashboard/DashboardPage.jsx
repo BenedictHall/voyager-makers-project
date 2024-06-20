@@ -57,7 +57,7 @@ export const DashboardPage = () => {
                     <Trip key={trip._id} trip={trip} token={token} />
                 ))}
             </div>
-            <h2>Upcoming ToDo's:</h2>
+            <h2>Upcoming ToDo&lsquo;s:</h2>
             <div>
                 {toDos.map((toDo) => (
                     <ToDo key={toDo._id} toDo={toDo} token={token} />
