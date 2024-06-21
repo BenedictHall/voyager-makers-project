@@ -23,7 +23,7 @@ export const AddNewTrip = () => {
         const userId = localStorage.getItem("user_id");
         try {
             await newTrip(token, userId, location, startDate, endDate, flight, flightNumber, accommodation, accommodationAddress);
-            navigate ("/trip/:id");
+            navigate ("/trips/:id");
         } catch (err) {
         console.error(err);
         // add a redirect here
