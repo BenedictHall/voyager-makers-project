@@ -51,6 +51,7 @@ describe("/toDos", () => {
                     description: "Buy milk, eggs, and bread",
                     dueDate: new Date(),
                     isCompleted: false,
+                    isNotified: false,
                     userId: user._id,
                     tripId: tripId,
                 });
@@ -68,6 +69,7 @@ describe("/toDos", () => {
                     description: "Buy milk, eggs, and bread",
                     dueDate: new Date(),
                     isCompleted: false,
+                    isNotified: false,
                     userId: user._id,
                     tripId: tripId,
                 });
@@ -88,6 +90,7 @@ describe("/toDos", () => {
                     description: "Buy milk, eggs, and bread",
                     dueDate: new Date(),
                     isCompleted: false,
+                    isNotified: false,
                     userId: user._id,
                     tripId: tripId,
                 });
@@ -104,6 +107,7 @@ describe("/toDos", () => {
                     description: "Buy milk, eggs, and bread",
                     dueDate: new Date(),
                     isCompleted: false,
+                    isNotified: false,
                     userId: user._id,
                     tripId: tripId,
                 });
@@ -123,6 +127,7 @@ describe("/toDos", () => {
                     title: "Buy groceries",
                     dueDate: new Date(),
                     isCompleted: false,
+                    isNotified: false,
                     userId: user._id,
                     tripId: tripId,
                 });
@@ -139,6 +144,7 @@ describe("/toDos", () => {
                     title: "Buy groceries",
                     dueDate: new Date(),
                     isCompleted: false,
+                    isNotified: false,
                     userId: user._id,
                     tripId: tripId,
                 });
@@ -158,6 +164,7 @@ describe("/toDos", () => {
                     title: "Buy groceries",
                     description: "Buy milk, eggs, and bread",
                     isCompleted: false,
+                    isNotified: false,
                     userId: user._id,
                     tripId: tripId,
                 });
@@ -174,6 +181,7 @@ describe("/toDos", () => {
                     title: "Buy groceries",
                     description: "Buy milk, eggs, and bread",
                     isCompleted: false,
+                    isNotified: false,
                     userId: user._id,
                     tripId: tripId,
                 });
@@ -279,6 +287,7 @@ describe("/toDos", () => {
                 description: "Buy milk, eggs, and bread",
                 dueDate: new Date(),
                 isCompleted: false,
+                isNotified: false,
                 userId: user._id,
                 tripId: tripId,
             });
@@ -346,6 +355,7 @@ describe("/toDos", () => {
                 description: "Buy milk, eggs, and bread",
                 dueDate: new Date(),
                 isCompleted: false,
+                isNotified: false,
                 userId: user._id,
                 tripId: tripId,
             });
@@ -455,6 +465,7 @@ describe("/toDos", () => {
                 description: "Buy milk, eggs, and bread",
                 dueDate: new Date(),
                 isCompleted: false,
+                isNotified: false,
                 userId: user._id,
                 tripId: tripId,
             });
@@ -474,6 +485,7 @@ describe("/toDos", () => {
                 description: "Buy milk, eggs, and bread",
                 dueDate: new Date(),
                 isCompleted: false,
+                isNotified: false,
                 userId: user._id,
                 tripId: tripId,
             });

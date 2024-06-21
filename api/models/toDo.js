@@ -5,6 +5,7 @@ const ToDoSchema = new mongoose.Schema({
     description: { type: String, required: true, trim: true },
     dueDate: { type: Date, required: true },
     isCompleted: { type: Boolean, required: true },
+    isNotified: { type: Boolean, required: true },
     userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     tripId: { type: mongoose.Schema.Types.ObjectId, ref: "Trip" }
 });

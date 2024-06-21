@@ -1,5 +1,7 @@
 const ToDo = require("../models/toDo");
+const Notification = require("../models/notification");
 const { generateToken } = require("../lib/token");
+const cron = require("node-cron")
 
 const getAllToDos = async (req, res) => {
     const toDos = await ToDo.find().sort({ dueDate: 1 });
@@ -12,7 +14,7 @@ const createToDo = async (req, res) => {
     const description = req.body.description;
     const dueDate = req.body.dueDate;
     const isCompleted = req.body.isCompleted;
-    const userId = req.user_id;
+    const userId = req.body.userId;
     const tripId = req.body.tripId;
 
     try {
@@ -23,6 +25,7 @@ const createToDo = async (req, res) => {
             isCompleted: isCompleted, 
             userId: userId, 
             tripId: tripId,
+            isNotified: false,
         });
         await toDo.save();
         const newToken = generateToken(req.user_id);
@@ -44,10 +47,12 @@ const toggleCompleteToDo = async (req, res) => {
         }
         if (toDo.isCompleted) {
             toDo.isCompleted = false;
+            toDo.isNotified = false;
             await toDo.save();
             res.status(200).json({ message: "ToDo Incomplete", token: newToken, toDo: toDo });
         } else {
             toDo.isCompleted = true;
+            toDo.isNotified = true;
             await toDo.save();
             res.status(200).json({ message: "ToDo Completed", token: newToken, toDo: toDo });
         }
@@ -75,11 +80,49 @@ const deleteToDo = async (req, res) => {
     }
 };
 
+// implement task notification logic
+const checkTodo = async () => {
+    const toDos = await ToDo.find({ isCompleted: false, isNotified: false });
+    const notifications = [];
+    const updatedTodos = [];
+
+    toDos.forEach(toDo => {
+        const timeDiff = new Date(toDo.dueDate) - new Date();
+        const hoursDiff = timeDiff / 1000 / 60 / 60;
+
+        if (hoursDiff <= 24) {
+            notifications.push({
+                isRead: false,
+                dueDate: toDo.dueDate,
+                userId: toDo.userId,
+                toDoId: toDo.id,
+                message: `"${toDo.title}" is due soon`
+            });
+            updatedTodos.push(toDo.id);
+        }
+    });
+    
+
+    if (notifications.length) {
+        await Promise.all([
+            Notification.insertMany(notifications),
+            ToDo.updateMany({ _id: { $in: updatedTodos }}, { isNotified: true })
+        ]);
+    }
+};
+
+// Schedule the task checker to run every hour
+cron.schedule('* * * * *', () => {
+    checkTodo();
+});
+
+
 const ToDosController = {
     getAllToDos: getAllToDos,
     createToDo: createToDo,
     toggleCompleteToDo: toggleCompleteToDo,
     deleteToDo: deleteToDo,
+    checkTodo: checkTodo,
 };
 
 module.exports = ToDosController;

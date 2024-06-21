@@ -13,6 +13,7 @@ export const newTrip = async (token, userId, location, startDate, endDate, fligh
         accommodation: accommodation,
         accommodationAddress: accommodationAddress,
     }
+    console.log("trip payload", payload)
     const requestOptions = {
         method:'POST',
         headers: {
@@ -60,3 +61,23 @@ export const getTrips = async (token) => {
     const data = await response.json();
     return data;
 };
+
+
+//to get single trip information from the database
+export const getSingleTrip = async (token, tripId) => {
+    const requestOptions = {
+        mehod: "GET",
+        headers: {
+            Authorization: `Bear ${token}`
+        },
+    };
+
+    const response = await fetch(`${BACKEND_URL}/trips/${tripId}`, requestOptions);
+
+    if(response.status !== 200) {
+        throw new Error("Unable to fetch trip data");
+    }
+
+    const data = await response.json();
+    return data
+}

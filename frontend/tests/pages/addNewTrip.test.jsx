@@ -52,7 +52,7 @@ describe("Add new trip page", () => {
         render(<AddNewTrip/>);
         const navigateMock = useNavigate();
         await completeNewTripForm();
-        expect(navigateMock).toHaveBeenCalledWith(`/trip/:id`);
+        expect(navigateMock).toHaveBeenCalledWith(`/trips`);
         
     })
 })

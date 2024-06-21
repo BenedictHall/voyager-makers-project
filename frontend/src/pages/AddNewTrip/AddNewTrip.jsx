@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
+import { redirect, useNavigate } from "react-router-dom";
 import {newTrip} from "../../services/trips"
+
 
 export const AddNewTrip = () => {
 // fields go here

@@ -1,9 +1,8 @@
 import { useState, useEffect} from "react";
-import { useNavigate } from "react-router-dom";
-import { Trip } from "../../components/Trip/trip";
-
+import { NavLink, useNavigate } from "react-router-dom";
+import { Trip } from "../../components/Trip/Trip";
 import { getTrips } from "../../services/trips"
-import Navbar from "../../components/Navbar/navbar";
+
 
 export const ShowAllTrips = () => {
     const [trips, setTrips] = useState([]);
@@ -14,7 +13,8 @@ export const ShowAllTrips = () => {
         if(token) {
             getTrips(token)
             .then((data) => {
-                setTrips(data.trips);
+                const sortedTrips = data.trips.sort((a, b) => a.startDate.localeCompare(b.startDate));
+                setTrips(sortedTrips);
                 localStorage.setItem("token", data.token);
             })
             .catch((error)=>{
@@ -32,14 +32,14 @@ export const ShowAllTrips = () => {
 
     return (
         <>
-        <Navbar/>
-        <h2>show all my trips</h2>
-        <div> 
-            {trips.map((trip)=>(
-                <Trip trip={trip} token={token} key={trip._id}/>
-            ))}
-        </div>
-            
+            <h2>show all my trips</h2>
+            <NavLink to = {"/trips/newtrip"} className="link">Create a New trip</NavLink>
+            <div> 
+                {trips.map((trip)=>(
+                    <Trip trip={trip} token={token} key={trip._id}/>
+                ))}
+            </div>
+
         </>
     );
 };

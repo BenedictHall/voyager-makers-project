@@ -71,9 +71,9 @@ describe("/trips/newtrip", () => {
                 .send({startDate:"2024-06-08", endDate:"2024-05-09"});
             const trips = await Trip.find();
             expect(trips.length).toEqual(0);
-        })
+        });
     });
-})
+});
 
 describe("/trips/", () => {
 
@@ -114,8 +114,7 @@ describe("/trips/", () => {
             const response = await request(app)
                 .get("/trips")
             expect(response.statusCode).toBe(200)
-            
-        })
+        });
 
         test("trips are recieved", async () => {
             const response = await request(app)
