@@ -148,7 +148,7 @@ export const DashboardPage = () => {
     };
 
     const navigateNewTrip = () => {
-        navigate("/trips")
+        navigate("../trips/newtrip")
     }
 
     const navigateTrips = () => {

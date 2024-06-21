@@ -36,7 +36,7 @@ export const ShowAllTrips = () => {
     }
 
     const newTripButton = () => {
-        navigate("trips/newtrip")
+        navigate("../trips/newtrip")
     }
 
     return (
