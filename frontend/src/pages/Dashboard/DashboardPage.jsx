@@ -164,6 +164,7 @@ export const DashboardPage = () => {
             <h1>At a glance</h1>
             <div style={{height:'50px'}}/>
             <h2>Upcoming Trips:</h2>
+
             
                 <Container>
                     <Row>
@@ -213,6 +214,7 @@ export const DashboardPage = () => {
                 </div>
                 <Button variant="secondary" style={{width: "10rem", margin: "0 auto"}}onClick={navigateFlight}>View all</Button>
                 
+
             </div>
             {/* <Button onClick={nagivateFlight}>View all</Button> */}
             </Col>

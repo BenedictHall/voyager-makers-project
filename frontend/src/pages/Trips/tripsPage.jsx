@@ -41,6 +41,7 @@ export const ShowAllTrips = () => {
 
     return (
         <>
+
             <h2>My trips</h2>
                 <Container>
                     <Row>
@@ -63,6 +64,7 @@ export const ShowAllTrips = () => {
                         ))}
                     </Row>
                 </Container>
+
 
         </>
     );
