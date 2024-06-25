@@ -5,7 +5,7 @@ import { addBudget } from '../../services/budget';
 
 
 
-const AddBudgetForm = (props)=> {
+export const AddBudgetForm = (props)=> {
     const tripId = props.tripId;
     const [formData, setFormData] = useState({
         title: '',

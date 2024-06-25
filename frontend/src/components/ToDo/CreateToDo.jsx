@@ -2,19 +2,22 @@ import { useState } from "react";
 import { isDate } from "validator";
 import { createToDo } from "../../services/todo";
 import { useRef } from "react";
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
+
+import Button from 'react-bootstrap/Button';
 
 export const CreateToDo = (props) => {
     const titleRef = useRef();
     const descriptionRef = useRef();
     const dueDateRef = useRef();
-    // const [description, setDescription] = useState("");
-    // const [dueDate, setDueDate] = useState("");
     const isCompleted = false;
     const tripId = props.tripId
     const userId = localStorage.getItem("userId");
     const token = props.token;
     const [error, setError] = useState("");
-    console.log("!!!!!token: ", token);
+    const [createToDoClicked, setCreateToDoClicked] = useState(false);
+    console.log(createToDoClicked, "is createToDoClicked")
     
 
     const handleSubmit = async (event) => {
@@ -57,6 +60,10 @@ export const CreateToDo = (props) => {
         }
     };
 
+    const handleCreate=() => {
+        setCreateToDoClicked(!createToDoClicked);
+    }
+
     // const handleTitleChange = (event) => {
     //     setTitle(event.target.value);
     // };
@@ -71,41 +78,40 @@ export const CreateToDo = (props) => {
 
     return (
         <div>
-            <h1>Create ToDo</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="title">Title:</label>
-                    <input
-                        type="text"
-                        id="title"
+                <Button onClick={handleCreate}>Create</Button>
+                {createToDoClicked ? (
+                    <form onSubmit={handleSubmit}>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="title">Title</InputGroup.Text>
+                        <Form.Control
+                        id="Title"
                         ref={titleRef}
-                        // value={title}
-                        // onChange={handleTitleChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="description">Description:</label>
-                    <input
-                        type="text"
-                        id="description"
+                        aria-describedby="title"
+                        onSubmit={handleSubmit}
+                        />
+                    </InputGroup>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text id="description">Description</InputGroup.Text>
+                        <Form.Control
+                        id="Description"
                         ref={descriptionRef}
-                        // value={description}
-                        // onChange={handleDescriptionChange}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="dueDate">Due Date:</label>
-                    <input
-                        type="date"
-                        id="dueDate"
-                        ref={dueDateRef}
-                        // value={dueDate}
-                        // onChange={handleDueDateChange}
-                    />
-                </div>
-                {error && <p role="error" className="error">{error}</p>}
-                <button type="submit" role="submit-button">Create ToDo</button>
-            </form>
+                        aria-describedby="description"
+                        />
+                        </InputGroup>
+                        <InputGroup className="mb-3">
+                        <label htmlFor="dueDate">Due Date:</label>
+                        <input
+                            type="date"
+                            id="dueDate"
+                            ref={dueDateRef}
+                            // value={dueDate}
+                            // onChange={handleDueDateChange}
+                        />
+                        </InputGroup>
+                    {error && <p role="error" className="error">{error}</p>}
+                    <Button variant="secondary" type="submit" role="submit-button" onClick={createToDo}>Create ToDo</Button>
+                    </form>
+                ) : (<p></p>)}
         </div>
     );          
 };
